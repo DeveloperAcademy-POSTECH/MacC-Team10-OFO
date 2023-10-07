@@ -5,4 +5,14 @@
 //  Created by 한지석 on 2023/10/07.
 //
 
-import Foundation
+import ProjectDescription
+import ProjectDescriptionHelpers
+
+private let moduleName = "Common"
+private let iOSTargetVersion = "16.0"
+
+let project = Project.makeModule(name: moduleName,
+                                 platform: .iOS,
+                                 product: .framework,
+                                 iOSTargetVersion: iOSTargetVersion)
+
