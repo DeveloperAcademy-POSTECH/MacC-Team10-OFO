@@ -5,4 +5,11 @@
 //  Created by 한지석 on 2023/10/07.
 //
 
-import Foundation
+import ProjectDescription
+
+// 외부 라이브러리를 관리하는 역할
+let dependencies = Dependencies(
+    carthage: [],
+    swiftPackageManager: [],
+    platforms: [.iOS]
+)
