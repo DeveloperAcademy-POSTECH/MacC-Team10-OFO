@@ -5,4 +5,7 @@
 //  Created by 한지석 on 2023/10/07.
 //
 
-import Foundation
+import ProjectDescription
+
+let appName = "LockerRoom"
+let workspace = Workspace(name: appName, projects: ["Projects/*"])
