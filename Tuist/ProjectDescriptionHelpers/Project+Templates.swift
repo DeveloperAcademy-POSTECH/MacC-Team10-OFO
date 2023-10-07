@@ -6,6 +6,50 @@ import ProjectDescription
 /// See https://docs.tuist.io/guides/helpers/
 
 extension Project {
+    
+    private static let organizationName = "com.kozi"
+    
+    public static func makeModule(
+        name: String,
+        platform: Platform,
+        product: Product,
+        iOSTargetVersion: String,
+        infoPlist: InfoPlist = .default,
+        sources: SourceFilesList = ["Sources/**"],
+        resources: ResourceFileElements? = nil,
+        dependencies: [TargetDependency] = [])
+    -> Project
+    {
+        let mainTarget = Target(
+            name: name,
+            platform: platform,
+            product: product,
+            bundleId: "com.kozi.\(name)",
+            deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
+            infoPlist: infoPlist,
+            sources: sources,
+            resources: resources,
+            dependencies: dependencies
+        )
+        
+        let testTarget = Target(
+            name: "\(name)Tests",
+            platform: platform,
+            product: .unitTests,
+            bundleId: "com.kozi.\(name)Tests",
+            infoPlist: .default,
+            sources: ["Tests/**"],
+            dependencies: [
+                .target(name: "\(name)")
+            ])
+
+        let targets: [Target] = [mainTarget, testTarget]
+        
+        return Project(name: name,
+                       organizationName: organizationName,
+                       targets: targets)
+    }
+    
     /// Helper function to create the Project for this ExampleApp
     public static func app(name: String, platform: Platform, additionalTargets: [String]) -> Project {
         var targets = makeAppTargets(name: name,
