@@ -38,6 +38,7 @@ extension Project {
             infoPlist: infoPlist,
             sources: sources,
             resources: resources,
+            scripts: [.SwiftLintString],
             dependencies: dependencies
         )
         
