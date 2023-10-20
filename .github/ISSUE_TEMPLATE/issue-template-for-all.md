@@ -1,7 +1,7 @@
 ---
 name: Issue template for all
 about: 기본적으로 쓰일 issue template
-title: "[FEAT] 이슈 제목 적어주세요"
+title: "[Label] 이슈 제목 적어주세요"
 labels: ''
 assignees: ''
 
