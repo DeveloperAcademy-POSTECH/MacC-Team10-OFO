@@ -8,7 +8,7 @@ import ProjectDescription
 extension Project {
     
     private static let organizationName = "com.kozi"
-    private static let iOSTargetVersion = "16.0"
+    private static let iOSTargetVersion = "17.0"
     
 //    private static let infoPlist: [String: InfoPlist.Value] = [
 //        "CFBundleShortVersionString": "1.0",
@@ -21,7 +21,7 @@ extension Project {
         name: String,
         platform: Platform,
         product: Product,
-        iOSTargetVersion: String,
+//        iOSTargetVersion: String,
         infoPlist: InfoPlist = .default,
         sources: SourceFilesList = ["Sources/**"],
         resources: ResourceFileElements? = nil,
@@ -59,7 +59,4 @@ extension Project {
                        organizationName: organizationName,
                        targets: targets)
     }
-
-    // MARK: - Private
-
 }

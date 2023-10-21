@@ -1,20 +1,22 @@
 //
 //  Project.swift
-//  MacC-Team10-OFOManifests
+//  ProjectDescriptionHelpers
 //
-//  Created by 한지석 on 2023/10/07.
+//  Created by 한지석 on 10/20/23.
 //
 
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-private let moduleName = "App"
+/// watch 개발 시작 후 모듈 구조 변경 예정
+/// Feature -> iOS
+///       -> watchOS
+private let moduleName = "Feature"
 
 let project = Project.makeModule(name: moduleName,
                                  platform: .iOS,
-                                 product: .app,
+                                 product: .staticFramework,
                                  dependencies: [
                                     .Project.Common,
                                     .Project.Core,
-                                    .Project.Feature,
                                  ])

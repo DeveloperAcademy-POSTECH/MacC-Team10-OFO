@@ -9,9 +9,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 private let moduleName = "Core"
-private let iOSTargetVersion = "16.0"
 
 let project = Project.makeModule(name: moduleName,
                                  platform: .iOS,
-                                 product: .framework,
-                                 iOSTargetVersion: iOSTargetVersion)
+                                 product: .staticFramework)
