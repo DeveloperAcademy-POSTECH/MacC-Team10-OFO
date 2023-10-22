@@ -10,6 +10,7 @@ import SwiftUI
 
 struct RecordDetailView: View {
     @State var isActionSheetShowing = false
+    @State var certifyingPhoto: String = ""
 
     var body: some View {
         ScrollView {
@@ -26,10 +27,22 @@ struct RecordDetailView: View {
             })
             .padding()
             .confirmationDialog("title", isPresented: $isActionSheetShowing) {
-                Button {
-
-                } label: {
-                    Text("사진 추가")
+                if certifyingPhoto.isEmpty {
+                    Button {
+                        certifyingPhoto = "사진"
+                    } label: {
+                        Text("사진 추가")
+                    }
+                } else {
+                    Button {
+                        certifyingPhoto = "사진"
+                    } label: {
+                        Text("사진 수정")
+                    }
+                    Button("사진 삭제", role: .destructive) {
+                        certifyingPhoto = ""
+                        print("사진 삭제")
+                    }
                 }
                 Button("취소", role: .cancel) {
                     print("tap cancel")
