@@ -53,5 +53,10 @@ statement_position:
   severity: warning
   statement_mode: uncuddled_else
 
+# 배열과 맵에서 후행 쉼표는 적용해야 합니다.
+trailing_comma:
+  severity: warning
+  mandatory_comma: true
+
 # 사용자 지정 규칙입니다.
-custom_rules:
+#custom_rules:
