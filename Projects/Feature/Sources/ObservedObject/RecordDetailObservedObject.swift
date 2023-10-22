@@ -14,8 +14,6 @@ class RecordDetailObservedObject: ObservableObject {
     @Published var isActionSheetShowing = false
     @Published var showPicker = false
 
-    @Published var certifyingImage: Image = Image("")
-
     // MARK: - Image Picker
 
     enum ImageState {

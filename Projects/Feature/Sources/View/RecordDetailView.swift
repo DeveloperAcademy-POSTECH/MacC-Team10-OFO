@@ -11,7 +11,6 @@ import PhotosUI
 
 struct RecordDetailView: View {
     @StateObject var observedObject = RecordDetailObservedObject()
-    @State var showPicker = false
 
     var body: some View {
         ScrollView {
