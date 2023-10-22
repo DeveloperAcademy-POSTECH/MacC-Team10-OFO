@@ -1,5 +1,5 @@
 //
-//  Dummy.swift
+//  DummyObject.swift
 //  Feature
 //
 //  Created by 한지석 on 10/22/23.
