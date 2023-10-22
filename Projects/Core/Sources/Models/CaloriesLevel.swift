@@ -17,7 +17,7 @@ enum CaloriesLevel: Int {
     case blue
     case indigo
     case purple
-    
+
     var level: Int {
         switch self {
         case .white:
