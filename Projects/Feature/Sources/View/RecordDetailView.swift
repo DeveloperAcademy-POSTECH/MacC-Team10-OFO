@@ -19,43 +19,6 @@ struct RecordDetailView: View {
                 Text("인증 샷")
                 Spacer()
             }
-//            Button(action: {
-//                observedObject.isActionSheetShowing = true
-//            }, label: {
-//                Rectangle()
-//                    .fill(Color.gray)
-//                    .frame(height: 500)
-//            })
-//            .padding()
-//            .confirmationDialog("title", isPresented: $observedObject.isActionSheetShowing) {
-//                if observedObject.certifyingPhoto.isEmpty {
-//                    Button {
-//                        observedObject.certifyingPhoto = "사진"
-//                        showPicker.toggle()
-//                    } label: {
-//                        Text("사진 추가")
-//                    }
-//                    PhotosPicker(selection: $observedObject.imageSelection,
-//                                 matching: .images,
-//                                 photoLibrary: .shared()) {
-//                        Text("사진 진짜 추가")
-//                    }
-//                } else {
-//                    Button {
-//                        observedObject.certifyingPhoto = "사진"
-//                    } label: {
-//                        Text("사진 수정")
-//                    }
-//                    Button("사진 삭제", role: .destructive) {
-//                        observedObject.certifyingPhoto = ""
-//                        print("사진 삭제")
-//                    }
-//                }
-//                Button("취소", role: .cancel) {
-//                    print("tap cancel")
-//                }
-//            }
-//            .photosPicker(isPresented: $showPicker, selection: $observedObject.imageSelection)
 
             CertifyingImageBtn(observedObject: observedObject)
         }
@@ -69,19 +32,30 @@ struct CertifyingImageBtn: View {
         Button(action: {
             observedObject.isActionSheetShowing = true
         }, label: {
-            if observedObject.certifyingImage == Image("") {
-                Rectangle()
-                    .fill(Color.gray)
-                    .frame(height: 500)
-            } else {
-                observedObject.certifyingImage
+            switch observedObject.imageState {
+            case .success(let image):
+                image
                     .resizable()
                     .frame(height: 500)
+                    .frame(maxWidth: .infinity)
+                    .scaledToFit()
+
+            case .loading:
+                ProgressView()
+            case .empty:
+                Rectangle()
+                    .frame(height: 500)
+                    .frame(maxWidth: .infinity)
+            case .failure:
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 40))
+                    .foregroundColor(.white)
             }
+
         })
         .padding()
         .confirmationDialog("title", isPresented: $observedObject.isActionSheetShowing) {
-            if observedObject.certifyingImage == Image("") {
+            if observedObject.imageSelection == nil {
                 Button {
                     observedObject.showPicker.toggle()
                 } label: {
@@ -94,7 +68,7 @@ struct CertifyingImageBtn: View {
                     Text("사진 수정")
                 }
                 Button("사진 삭제", role: .destructive) {
-                    observedObject.certifyingImage = Image("")
+                    observedObject.imageSelection = nil
                     print("사진 삭제")
                 }
             }
