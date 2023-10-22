@@ -15,5 +15,5 @@ let project = Project.makeModule(name: moduleName,
                                  product: .staticFramework,
                                  dependencies: [
                                     .Project.Common,
-                                    .Project.Core,
+                                    .Project.Core
                                  ])
