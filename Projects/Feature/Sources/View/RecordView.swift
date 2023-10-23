@@ -9,7 +9,8 @@ import SwiftUI
 import Common
 
 public struct RecordView: View {
-    @ObservedObject var observedObject: RecordObservedObject
+
+    @ObservedObject var observedObject: RecordObservableObject
 
     let recordCounts: [String: Int] = [
         "2023년 9월": 6,
@@ -23,34 +24,38 @@ public struct RecordView: View {
     //    mock ::: 이미지 데이터가 없는 경우
     //    let recordCounts: [String: Int] = [:]
 
-//    public init() {
-//
-//    }
+    //    public init() {
+    //
+    //    }
 
     public var body: some View {
         NavigationView {
             // 이미지 데이터가 없는 경우
-            if observedObject.records.isEmpty {
-                VStack {
-                    Spacer()
-                    Text("아직 운동 기록이 존재하지 않아요.")
-                        .font(.subheadline)
-                    Spacer()
-                }
-            } else {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        ForEach(recordCounts.keys.sorted(by: >), id: \.self) { month in
-                            Section(header: Text(month).font(.subheadline)) {
-                                RecordGrid(observedObject: observedObject, recordCount: recordCounts[month, default: 0],
-                                           recordMonth: month.replacingOccurrences(of: "년 ", with: "_")
-                                    .replacingOccurrences(of: "월", with: ""))
+            ZStack {
+                Color(red: 24 / 255, green: 26 / 255, blue: 31 / 255)
+                    .ignoresSafeArea()
+                if observedObject.records.isEmpty {
+                    VStack {
+                        Spacer()
+                        Text("아직 운동 기록이 존재하지 않아요.")
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                } else {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 16) {
+                            ForEach(recordCounts.keys.sorted(by: >), id: \.self) { month in
+                                Section(header: Text(month).font(.subheadline)) {
+                                    RecordGrid(observedObject: observedObject, recordCount: recordCounts[month, default: 0],
+                                               recordMonth: month.replacingOccurrences(of: "년 ", with: "_")
+                                        .replacingOccurrences(of: "월", with: ""))
                                     .padding(.bottom, 15)
+                                }
                             }
                         }
+                        .padding(.top, 40)
+                        .navigationTitle("갤러리")
                     }
-                    .padding(.top, 40)
-                    .navigationTitle("갤러리")
                 }
             }
         }
@@ -59,7 +64,8 @@ public struct RecordView: View {
 
 // 레코드 그리드
 private struct RecordGrid: View {
-    var observedObject: RecordObservedObject
+
+    var observedObject: RecordObservableObject
 
     let recordCount: Int
     let recordMonth: String
@@ -107,8 +113,8 @@ private struct RecordGrid: View {
                     ForEach(startIndex..<endIndex, id: \.self) { index in
                         NavigationLink {
                             RecordDetailView(
-                                observedObject:
-                                    RecordDetailObservedObject(
+                                observable:
+                                    RecordDetailObservableObject(
                                         record: observedObject.records[index],
                                         delegate: observedObject, recordIndex: index
                                     )
