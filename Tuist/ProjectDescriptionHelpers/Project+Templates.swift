@@ -33,7 +33,7 @@ extension Project {
             name: name,
             platform: platform,
             product: product,
-            bundleId: "com.kozi.\(name)",
+            bundleId: "com.kozi.\(name.lowercased())",
             deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
             infoPlist: infoPlist,
             sources: sources,
@@ -41,7 +41,9 @@ extension Project {
             scripts: [.SwiftLintString],
             dependencies: dependencies
         )
-        
+
+
+
         let testTarget = Target(
             name: "\(name)Tests",
             platform: platform,
@@ -60,3 +62,4 @@ extension Project {
                        targets: targets)
     }
 }
+
