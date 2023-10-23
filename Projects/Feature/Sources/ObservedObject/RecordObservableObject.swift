@@ -1,5 +1,5 @@
 //
-//  RecordObservedObject.swift
+//  RecordObservableObject.swift
 //  Feature
 //
 //  Created by 박승찬 on 10/23/23.
@@ -9,7 +9,7 @@
 import Foundation
 import Core
 
-class RecordObservedObject: RecordDetailDelegate, ObservableObject {
+class RecordObservableObject: RecordDetailDelegate, ObservableObject {
     @Published var records: [Record]
 
     init(records: [Record]) {

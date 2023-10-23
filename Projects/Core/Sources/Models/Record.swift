@@ -17,6 +17,20 @@ public struct Record {
     public let goal: PlayerGoals
     public let playTime: Date
     public var image: Image?
+
+    public init(matchDate: Date,
+                distanceCovered: Double,
+                calories: Double,
+                goal: PlayerGoals,
+                playTime: Date,
+                image: Image? = nil) {
+        self.matchDate = matchDate
+        self.distanceCovered = distanceCovered
+        self.calories = calories
+        self.goal = goal
+        self.playTime = playTime
+        self.image = image
+    }
 }
 
 public struct RecordAverage {

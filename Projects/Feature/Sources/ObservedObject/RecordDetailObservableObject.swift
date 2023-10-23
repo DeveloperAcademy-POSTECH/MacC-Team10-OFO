@@ -1,5 +1,5 @@
 //
-//  RecordDetailObservedObject.swift
+//  RecordDetailObservableObject.swift
 //  Feature
 //
 //  Created by 박승찬 on 10/23/23.
@@ -16,7 +16,7 @@ protocol RecordDetailDelegate: AnyObject {
     func setRecord(record: Record, index: Int)
 }
 
-class RecordDetailObservedObject: ObservableObject {
+class RecordDetailObservableObject: ObservableObject {
     @Published var record: Record
 
     @Published var isActionSheetShowing: Bool
@@ -76,7 +76,6 @@ class RecordDetailObservedObject: ObservableObject {
     }
 
     @Published private(set) var imageState: ImageState = .empty
-
     @Published var imageSelection: PhotosPickerItem? {
         didSet {
             if let imageSelection {
@@ -88,10 +87,25 @@ class RecordDetailObservedObject: ObservableObject {
         }
     }
 
+    @Published var mockRecord = Record(matchDate: Date(),
+                                   distanceCovered: 4.5,
+                                   calories: 1200,
+                                   goal: PlayerGoals(goalCalories: 1500,
+                                                     goalDistanceCovered: 5),
+                                   playTime: Date())
+
+    var distanceCoveredPercentage: Double {
+        return record.distanceCovered / record.goal.goalDistanceCovered
+    }
+
+    var caloriesPercentage: Double {
+        return record.calories / record.goal.goalCalories
+    }
     func updateRecord(image: Image?) {
         var updateRecord = self.record
         updateRecord.image = image
         self.delegate?.setRecord(record: updateRecord, index: self.recordInedx)
+
     }
 
     // MARK: - Private Methods
