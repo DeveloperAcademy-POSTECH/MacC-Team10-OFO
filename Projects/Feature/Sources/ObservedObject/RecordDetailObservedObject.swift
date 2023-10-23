@@ -12,7 +12,7 @@ import PhotosUI
 
 class RecordDetailObservedObject: ObservableObject {
     @Published var isActionSheetShowing = false
-    @Published var showPicker = false
+    @Published var showPhotoPicker = false
 
     // MARK: - Image Picker
 
@@ -32,21 +32,11 @@ class RecordDetailObservedObject: ObservableObject {
 
         static var transferRepresentation: some TransferRepresentation {
             DataRepresentation(importedContentType: .image) { data in
-            #if canImport(AppKit)
-                guard let nsImage = NSImage(data: data) else {
-                    throw TransferError.importFailed
-                }
-                let image = Image(nsImage: nsImage)
-                return ProfileImage(image: image)
-            #elseif canImport(UIKit)
                 guard let uiImage = UIImage(data: data) else {
                     throw TransferError.importFailed
                 }
                 let image = Image(uiImage: uiImage)
                 return CertifyingImage(image: image)
-            #else
-                throw TransferError.importFailed
-            #endif
             }
         }
     }
@@ -76,7 +66,6 @@ class RecordDetailObservedObject: ObservableObject {
                 switch result {
                 case .success(let profileImage?):
                     self.imageState = .success(profileImage.image)
-                    self.certifyingImage = profileImage.image
                 case .success(nil):
                     self.imageState = .empty
                 case .failure(let error):
