@@ -8,9 +8,10 @@
 
 import SwiftUI
 import PhotosUI
+import Common
 
 struct RecordDetailView: View {
-    @StateObject var observedObject = RecordDetailObservedObject()
+    @StateObject var observedObject: RecordDetailObservedObject
 
     var body: some View {
         ScrollView {
@@ -38,8 +39,8 @@ struct CertifyingImageButton: View {
             observedObject.isActionSheetShowing = true
         }, label: {
             switch observedObject.imageState {
-            case .success(let image):
-                image
+            case .success:
+                observedObject.certifyingImage
                     .resizable()
                     .frame(height: 500)
                     .scaledToFit()
@@ -48,12 +49,13 @@ struct CertifyingImageButton: View {
                 ProgressView()
             case .empty:
                 ZStack {
-                    RoundedRectangle(cornerSize: CGSize(width: 4, height: 4))
-                        .fill(.gray)
+                    observedObject.certifyingImage
+                        .resizable()
                         .frame(height: 500)
                         .frame(maxWidth: .infinity)
-                    Text("오늘의 인증샷을 추가해주세요")
-                        .foregroundStyle(.white)
+                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 4, height: 4)))
+//                    Text("오늘의 인증샷을 추가해주세요")
+//                        .foregroundStyle(.white)
                 }
             case .failure:
                 Image(systemName: "exclamationmark.triangle.fill")
@@ -64,7 +66,7 @@ struct CertifyingImageButton: View {
         })
         .padding()
         .confirmationDialog("title", isPresented: $observedObject.isActionSheetShowing) {
-            if observedObject.imageSelection == nil {
+            if observedObject.certifyingImage == Image(asset: CommonAsset._2387) {
                 Button {
                     observedObject.showPhotoPicker.toggle()
                 } label: {
@@ -78,6 +80,8 @@ struct CertifyingImageButton: View {
                 }
                 Button("사진 삭제", role: .destructive) {
                     observedObject.imageSelection = nil
+                    observedObject.certifyingImage = Image(asset: CommonAsset._2387)
+                    observedObject.updateRecord(image: nil)
                     print("사진 삭제")
                 }
             }
@@ -87,8 +91,4 @@ struct CertifyingImageButton: View {
         }
         .photosPicker(isPresented: $observedObject.showPhotoPicker, selection: $observedObject.imageSelection)
     }
-}
-
-#Preview {
-    RecordDetailView()
 }
