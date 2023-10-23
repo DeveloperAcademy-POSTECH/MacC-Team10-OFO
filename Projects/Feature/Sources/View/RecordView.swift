@@ -10,7 +10,7 @@ import Common
 
 public struct RecordView: View {
 
-    @ObservedObject var observedObject: RecordObservableObject
+    @ObservedObject var observable: RecordObservableObject
 
     let recordCounts: [String: Int] = [
         "2023년 9월": 6,
