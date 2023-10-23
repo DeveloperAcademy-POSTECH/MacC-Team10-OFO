@@ -7,8 +7,11 @@
 //
 
 import SwiftUI
+import Common
 
 struct MainView: View {
+
+    @ObservedObject var observable = MainObservableObject()
 
     var body: some View {
         NavigationView {
@@ -16,10 +19,12 @@ struct MainView: View {
                 Color(red: 24 / 255, green: 26 / 255, blue: 31 / 255)
                     .ignoresSafeArea()
                 VStack {
-                    Image(systemName: "person")
-                        .resizable()
-                        .frame(width: 226, height: 226)
-                        .padding(.top, 50)
+                    DonutChartView(distanceCovered: observable.player.average.averageDistanceCovered,
+                                   calories: observable.player.average.averageCalories,
+                                   innerCircleSize: 93,
+                                   outerCircleSize: 104,
+                                   centerText: Text("79").font(.system(size: 34, weight: .semibold)))
+                    .frame(width: 226, height: 226)
                     userExpSummaryCell
                 }
                 .toolbar {
@@ -34,7 +39,7 @@ struct MainView: View {
                         }
                     }
                 }
-                .navigationTitle("기록") // 색상 변경 필요
+                .navigationTitle("기록")
             }
         }
     }
@@ -58,19 +63,21 @@ struct MainView: View {
                         .foregroundColor(.white)
                         .padding(.horizontal, 18)
                     }
-                    expProgressBar(type: .distanceCovered, value: 80)
-                        .padding(.top, 20)
-                    expProgressBar(type: .calories, value: 40)
-                        .padding(.top, 25)
+                    expProgressBar(type: .distanceCovered,
+                                   value: observable.player.average.averageDistanceCovered * 100)
+                    .padding(.top, 20)
+                    expProgressBar(type: .calories,
+                                   value: observable.player.average.averageCalories * 100)
+                    .padding(.top, 25)
                 }
             }
             .padding(.horizontal, 16)
-            .padding(.top, 60)
+            .padding(.top, 40)
     }
 
     func expProgressBar(
         type: ProgressBarType,
-        value: Float
+        value: Double
     ) -> some View {
 
         var title: String
@@ -88,7 +95,8 @@ struct MainView: View {
             description = "다음 레벨까지 60,000Kcal 남았어요."
         }
         return VStack(spacing: 0) {
-            ProgressView(value: value, total: 100) {
+            ProgressView(value: value, 
+                         total: 100) {
                 Text(title)
                     .foregroundColor(.white)
             }
@@ -110,41 +118,6 @@ struct MainView: View {
 enum ProgressBarType {
     case distanceCovered
     case calories
-}
-
-struct BarProgressStyle: ProgressViewStyle {
-
-    var color: Color
-    var height: Double = 10.0
-    var labelFontStyle: Font = .body
-
-    func makeBody(configuration: Configuration) -> some View {
-
-        let progress = configuration.fractionCompleted ?? 0.0
-
-        GeometryReader { geometry in
-            VStack(alignment: .leading) {
-                configuration.label
-                    .font(labelFontStyle)
-                RoundedRectangle(cornerRadius: 8.0)
-                    .fill(Color(uiColor: .darkGray))
-                    .frame(height: height)
-                    .frame(width: geometry.size.width)
-                    .overlay(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 8.0)
-                            .fill(color)
-                            .frame(width: geometry.size.width * progress)
-                            .overlay {
-                                if let currentValueLabel = configuration.currentValueLabel {
-                                    currentValueLabel
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                }
-                            }
-                    }
-            }
-        }
-    }
 }
 
 #Preview {
