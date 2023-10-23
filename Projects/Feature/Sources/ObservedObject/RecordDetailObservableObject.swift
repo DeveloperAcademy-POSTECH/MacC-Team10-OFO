@@ -1,5 +1,5 @@
 //
-//  RecordDetailObservedObject.swift
+//  RecordDetailObservableObject.swift
 //  Feature
 //
 //  Created by 박승찬 on 10/23/23.
@@ -16,7 +16,7 @@ protocol RecordDetailDelegate: AnyObject {
     func setRecord(record: Record, index: Int)
 }
 
-class RecordDetailObservedObject: ObservableObject {
+class RecordDetailObservableObject: ObservableObject {
     @Published var record: Record
 
     @Published var isActionSheetShowing: Bool
