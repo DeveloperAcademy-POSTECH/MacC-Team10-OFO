@@ -15,7 +15,7 @@ struct RecordDetailView: View {
     var body: some View {
         ScrollView {
             certifyingImageHeader
-            CertifyingImageBtn(observedObject: observedObject)
+            CertifyingImageButton(observedObject: observedObject)
         }
     }
 }
@@ -30,7 +30,7 @@ extension RecordDetailView {
     }
 }
 
-struct CertifyingImageBtn: View {
+struct CertifyingImageButton: View {
     @ObservedObject var observedObject: RecordDetailObservedObject
 
     var body: some View {
