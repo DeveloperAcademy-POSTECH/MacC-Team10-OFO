@@ -20,10 +20,10 @@ public struct Record {
 
 public struct RecordAverage {
     public let record: [Record]
-    public var averageCalories: Double {
-        return 1.0
-    }
-    public var averageDistanceCovered: Double {
-        return 1.0
+    public var averageDistanceCovered: Double = 0.8
+    public var averageCalories: Double = 0.47
+
+    public init(record: [Record]) {
+        self.record = record
     }
 }
