@@ -8,7 +8,7 @@
 import SwiftUI
 
 // 사용 예:
-// DonutChartView(innerCircleSize: 130, outerCircleSize: 140, centerText: "79")
+// DonutChartView(innerCircleSize: 130, outerCircleSize: 140, centerText: Text("79"))
 public struct DonutChartView: View {
     // mock
     private var distanceCovered: Double = 0.8
@@ -16,11 +16,11 @@ public struct DonutChartView: View {
 
     private let innerCircleSize: CGFloat // 내부 원 지름
     private let outerCircleSize: CGFloat // 바깥 원 지름
-    private let centerText: String // 중앙 텍스트
+    private let centerText: Text // 중앙 텍스트
 
     public init(innerCircleSize: CGFloat = 130,
                 outerCircleSize: CGFloat = 140,
-                centerText: String = "") {
+                centerText: Text = Text("75")) {
         self.innerCircleSize = innerCircleSize
         self.outerCircleSize = outerCircleSize
         self.centerText = centerText
@@ -45,7 +45,7 @@ public struct DonutChartView: View {
                     Circle()
                         .fill(Color.black)
                         .frame(width: innerCircleSize * 2, height: innerCircleSize * 2, alignment: .center)
-                    Text(centerText)
+                    centerText
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                 }
