@@ -14,8 +14,8 @@ public struct RecordView: View {
         "2023년 8월": 7
     ]
 
-//    이미지 데이터가 없는 경우 mock
-//    let recordCounts: [String: Int] = [:]
+    //    mock ::: 이미지 데이터가 없는 경우
+    //    let recordCounts: [String: Int] = [:]
 
     public init() {}
 
@@ -34,7 +34,9 @@ public struct RecordView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         ForEach(recordCounts.keys.sorted(by: >), id: \.self) { month in
                             Section(header: Text(month).font(.subheadline)) {
-                                RecordGrid(recordCount: recordCounts[month, default: 0], recordMonth: month.replacingOccurrences(of: "년 ", with: "_").replacingOccurrences(of: "월", with: ""))
+                                RecordGrid(recordCount: recordCounts[month, default: 0],
+                                           recordMonth: month.replacingOccurrences(of: "년 ", with: "_")
+                                    .replacingOccurrences(of: "월", with: ""))
                                     .padding(.bottom, 15)
                             }
                         }
@@ -65,9 +67,24 @@ private struct RecordGrid: View {
         return (imageWidth, imageHeight)
     }
 
-    private func imageNameForIndex(_ index: Int) -> String {
-        "\(recordMonth)_\(index + 1)"
-    }
+    // mockImage ::: 추후 삭제 예정
+    private let mockImages = [
+        CommonAsset._2381,
+        CommonAsset._2382,
+        CommonAsset._2383,
+        CommonAsset._2384,
+        CommonAsset._2385,
+        CommonAsset._2386,
+        CommonAsset._2387,
+        CommonAsset._2391,
+        CommonAsset._2392,
+        CommonAsset._2393,
+        CommonAsset._2394,
+        CommonAsset._2394,
+        CommonAsset._2395,
+        CommonAsset._2396
+
+    ]
 
     var body: some View {
         VStack(spacing: 8) {
@@ -78,31 +95,13 @@ private struct RecordGrid: View {
 
                     // 실 이미지 표시
                     ForEach(startIndex..<endIndex, id: \.self) { index in
-                        if let img = ImageLoader.loadImage(named: imageNameForIndex(index)) {
-                            img
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: imageDimensions.width, height: imageDimensions.height)
-                                .background(Color.yellow)
-                                .cornerRadius(4)
-                        } else {
-                            Image(systemName: "photo") 
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: imageDimensions.width, height: imageDimensions.height)
-                        }
+                        Image(asset: mockImages[index])
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: imageDimensions.width, height: imageDimensions.height)
+                            .background(Color.yellow)
+                            .cornerRadius(4)
                     }
-//                    // 실 이미지 표시
-//                    ForEach(startIndex..<endIndex, id: \.self) { _ in
-//
-//
-//                            Image("23_8_1")
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                                .frame(width: imageDimensions.width, height: imageDimensions.height)
-//                                .background(Color.yellow)
-//                                .cornerRadius(4)
-//                        }
 
                     // 투명 이미지(left align 목적)
                     ForEach(endIndex..<startIndex + 4, id: \.self) { _ in
