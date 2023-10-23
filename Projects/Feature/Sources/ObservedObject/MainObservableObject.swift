@@ -18,9 +18,8 @@ final class MainObservableObject: ObservableObject {
                                            goal: PlayerGoals(goalCalories: 1500,
                                                              goalDistanceCovered: 4.5),
                                            statistics: PlayerStatistics(totalDistanceCovered: 46.3,
-                                                                        totalCalories: 16000.2,
+                                                                        totalCalories: 16502.3,
                                                                         totalPlayTime: Date(),
                                                                         totalPlay: 11),
                                            average: RecordAverage(record: []))
-
 }

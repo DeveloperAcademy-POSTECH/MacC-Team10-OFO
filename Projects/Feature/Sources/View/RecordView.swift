@@ -34,7 +34,7 @@ public struct RecordView: View {
             ZStack {
                 Color(red: 24 / 255, green: 26 / 255, blue: 31 / 255)
                     .ignoresSafeArea()
-                if observedObject.records.isEmpty {
+                if observable.records.isEmpty {
                     VStack {
                         Spacer()
                         Text("아직 운동 기록이 존재하지 않아요.")
@@ -46,7 +46,7 @@ public struct RecordView: View {
                         VStack(alignment: .leading, spacing: 16) {
                             ForEach(recordCounts.keys.sorted(by: >), id: \.self) { month in
                                 Section(header: Text(month).font(.subheadline)) {
-                                    RecordGrid(observedObject: observedObject, recordCount: recordCounts[month, default: 0],
+                                    RecordGrid(observable: observable, recordCount: recordCounts[month, default: 0],
                                                recordMonth: month.replacingOccurrences(of: "년 ", with: "_")
                                         .replacingOccurrences(of: "월", with: ""))
                                     .padding(.bottom, 15)
@@ -65,7 +65,7 @@ public struct RecordView: View {
 // 레코드 그리드
 private struct RecordGrid: View {
 
-    var observedObject: RecordObservableObject
+    var observable: RecordObservableObject
 
     let recordCount: Int
     let recordMonth: String
@@ -115,12 +115,12 @@ private struct RecordGrid: View {
                             RecordDetailView(
                                 observable:
                                     RecordDetailObservableObject(
-                                        record: observedObject.records[index],
-                                        delegate: observedObject, recordIndex: index
+                                        record: observable.records[index],
+                                        delegate: observable, recordIndex: index
                                     )
                             )
                         } label: {
-                            if let image = observedObject.records[index].image {
+                            if let image = observable.records[index].image {
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
