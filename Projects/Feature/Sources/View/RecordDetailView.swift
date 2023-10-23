@@ -12,29 +12,29 @@ import Common
 
 struct RecordDetailView: View {
 
-    @StateObject var observedObject: RecordDetailObservedObject
+    @StateObject var observable: RecordDetailObservableObject
 
     var body: some View {
         ZStack {
             Color(red: 24 / 255, green: 26 / 255, blue: 31 / 255)
                 .ignoresSafeArea()
             ScrollView {
-                VStack {
-                    HStack {
-                        DonutChartView(distanceCovered: observedObject.distanceCoveredPercentage,
-                                       calories: observedObject.caloriesPercentage,
-                                       innerCircleSize: 60,
-                                       outerCircleSize: 65,
-                                       centerText: Text("10"))
-                        recordSummaryView
-                            .padding(.trailing, 28)
-                    }
-                    .frame(height: 160)
-                    certifyingImageHeader
-                    CertifyingImageButton(observedObject: observedObject)
+                HStack {
+                    DonutChartView(distanceCovered: observable.distanceCoveredPercentage,
+                                   calories: observable.caloriesPercentage,
+                                   innerCircleSize: 60,
+                                   outerCircleSize: 65,
+                                   centerText: Text("10"))
+                    recordSummaryView
+                        .padding(.trailing, 28)
                 }
+                .frame(height: 160)
+                certifyingImageHeader
+                CertifyingImageButton(observedObject: observable)
+                Spacer()
             }
         }
+        .navigationBarTitle("", displayMode: .inline)
     }
 
     var recordSummaryView: some View {
@@ -57,12 +57,12 @@ struct RecordDetailView: View {
 
         switch type {
         case .distanceCovered:
-            title = "활동량 \(observedObject.distanceCoveredPercentage * 100)%"
-            subTitle = "\(observedObject.record.distanceCovered) / 6.3 KM"
+            title = "활동량 \(observable.distanceCoveredPercentage * 100)%"
+            subTitle = "\(observable.record.distanceCovered) / 6.3 KM"
             color = Color(red: 169 / 255, green: 252 / 255, blue: 231 / 255)
         case .calories:
-            title = "칼로리 \(observedObject.caloriesPercentage * 100)%"
-            subTitle = "\(observedObject.record.calories) / 2,000 칼로리"
+            title = "칼로리 \(observable.caloriesPercentage * 100)%"
+            subTitle = "\(observable.record.calories) / 2,000 칼로리"
             color = Color(red: 255 / 255, green: 146 / 255, blue: 165 / 255)
         }
 
@@ -90,10 +90,10 @@ struct RecordDetailView: View {
         switch type {
         case .distanceCovered:
             title = "활동량"
-            subTitle = "\(observedObject.record.distanceCovered) KM"
+            subTitle = "\(observable.record.distanceCovered) KM"
         case .calories:
             title = "소모 칼로리"
-            subTitle = "\(observedObject.record.calories) 칼로리"
+            subTitle = "\(observable.record.calories) 칼로리"
         }
 
         return HStack {
@@ -104,7 +104,6 @@ struct RecordDetailView: View {
                 .font(Font.system(size: 14, weight: .semibold))
         }
     }
-
 }
 
 extension RecordDetailView {
@@ -119,7 +118,8 @@ extension RecordDetailView {
 }
 
 struct CertifyingImageButton: View {
-    @ObservedObject var observedObject: RecordDetailObservedObject
+
+    @ObservedObject var observedObject: RecordDetailObservableObject
 
     var body: some View {
         Button(action: {
