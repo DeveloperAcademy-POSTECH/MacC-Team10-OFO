@@ -8,19 +8,24 @@
 import SwiftUI
 
 // 사용 예:
-// DonutChartView(innerCircleSize: 130, outerCircleSize: 140, centerText: Text("79"))
+// DonutChartView
+// (distanceCovered: 0.8, calories: 0.2, innerCircleSize: 130, outerCircleSize: 140, centerText: Text("79"))
 public struct DonutChartView: View {
     // mock
-    private var distanceCovered: Double = 0.8
-    private var calories: Double = 0.2
+    private var distanceCovered: Double
+    private var calories: Double
 
     private let innerCircleSize: CGFloat // 내부 원 지름
     private let outerCircleSize: CGFloat // 바깥 원 지름
     private let centerText: Text // 중앙 텍스트
 
-    public init(innerCircleSize: CGFloat = 130,
+    public init(distanceCovered: Double,
+                calories: Double,
+                innerCircleSize: CGFloat = 130,
                 outerCircleSize: CGFloat = 140,
                 centerText: Text = Text("75")) {
+        self.distanceCovered = distanceCovered
+        self.calories = calories
         self.innerCircleSize = innerCircleSize
         self.outerCircleSize = outerCircleSize
         self.centerText = centerText
@@ -43,7 +48,7 @@ public struct DonutChartView: View {
                     }
                     .aspectRatio(1, contentMode: .fit)
                     Circle()
-                        .fill(Color.black)
+                        .fill(Color(red: 24 / 255, green: 26 / 255, blue: 31 / 255))
                         .frame(width: innerCircleSize * 2, height: innerCircleSize * 2, alignment: .center)
                     centerText
                         .foregroundColor(.white)
@@ -52,7 +57,7 @@ public struct DonutChartView: View {
                 Spacer()
             }
         }
-        .background(Color.black)
+        .background(Color(red: 24 / 255, green: 26 / 255, blue: 31 / 255))
     }
 
     // 파이 차트
@@ -110,8 +115,4 @@ public struct DonutChartView: View {
             context.fill(emptyPath, with: .color(lightColor))
         }
     }
-}
-
-#Preview {
-    DonutChartView()
 }
