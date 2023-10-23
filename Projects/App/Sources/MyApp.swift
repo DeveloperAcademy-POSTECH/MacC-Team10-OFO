@@ -1,4 +1,3 @@
-//
 //  MyApp.swift
 //  App
 //
@@ -14,6 +13,7 @@ struct MyApp: App {
     var body: some Scene {
         WindowGroup {
             SwiftUIView()
+                .environment(\.colorScheme, .dark)
         }
     }
 }
