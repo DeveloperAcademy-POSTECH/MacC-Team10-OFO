@@ -95,12 +95,16 @@ private struct RecordGrid: View {
 
                     // 실 이미지 표시
                     ForEach(startIndex..<endIndex, id: \.self) { index in
-                        Image(asset: mockImages[index])
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: imageDimensions.width, height: imageDimensions.height)
-                            .background(Color.yellow)
-                            .cornerRadius(4)
+                        NavigationLink {
+                            RecordDetailView()
+                        } label: {
+                            Image(asset: mockImages[index])
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: imageDimensions.width, height: imageDimensions.height)
+                                .background(Color.yellow)
+                                .cornerRadius(4)
+                        }
                     }
 
                     // 투명 이미지(left align 목적)
