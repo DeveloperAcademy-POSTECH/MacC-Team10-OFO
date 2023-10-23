@@ -10,7 +10,7 @@ import SwiftUI
 import PhotosUI
 
 struct RecordDetailView: View {
-    @StateObject var observedObject = RecordDetailObservedObject()
+    @StateObject var observedObject: RecordDetailObservedObject
 
     var body: some View {
         ScrollView {
@@ -87,8 +87,4 @@ struct CertifyingImageButton: View {
         }
         .photosPicker(isPresented: $observedObject.showPhotoPicker, selection: $observedObject.imageSelection)
     }
-}
-
-#Preview {
-    RecordDetailView()
 }

@@ -9,10 +9,26 @@
 import Foundation
 import SwiftUI
 import PhotosUI
+import Core
 
 class RecordDetailObservedObject: ObservableObject {
-    @Published var isActionSheetShowing = false
-    @Published var showPhotoPicker = false
+    @Published var record: Record
+
+    @Published var isActionSheetShowing: Bool
+    @Published var showPhotoPicker: Bool
+
+    init(record: Record,
+         isActionSheetShowing: Bool = false,
+         showPhotoPicker: Bool = false,
+         imageState: ImageState = .empty,
+         imageSelection: PhotosPickerItem? = nil
+    ) {
+        self.record = record
+        self.isActionSheetShowing = isActionSheetShowing
+        self.showPhotoPicker = showPhotoPicker
+        self.imageState = imageState
+        self.imageSelection = imageSelection
+    }
 
     // MARK: - Image Picker
 
