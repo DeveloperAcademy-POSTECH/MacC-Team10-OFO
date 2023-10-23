@@ -53,7 +53,6 @@ struct CertifyingImageButton: View {
                         .resizable()
                         .frame(height: 500)
                         .frame(maxWidth: .infinity)
-                        .scaledToFill()
                         .clipShape(RoundedRectangle(cornerSize: CGSize(width: 4, height: 4)))
 //                    Text("오늘의 인증샷을 추가해주세요")
 //                        .foregroundStyle(.white)
@@ -82,6 +81,7 @@ struct CertifyingImageButton: View {
                 Button("사진 삭제", role: .destructive) {
                     observedObject.imageSelection = nil
                     observedObject.certifyingImage = Image(asset: CommonAsset._2387)
+                    observedObject.updateRecord(image: nil)
                     print("사진 삭제")
                 }
             }

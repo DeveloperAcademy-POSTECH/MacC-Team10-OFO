@@ -12,6 +12,10 @@ import PhotosUI
 import Core
 import Common
 
+protocol RecordDetailDelegate: AnyObject {
+    func setRecord(record: Record, index: Int)
+}
+
 class RecordDetailObservedObject: ObservableObject {
     @Published var record: Record
 
@@ -20,15 +24,22 @@ class RecordDetailObservedObject: ObservableObject {
 
     @Published var certifyingImage: Image = Image(asset: CommonAsset._2387)
 
+    weak var delegate: RecordDetailDelegate?
+    let recordInedx: Int
+
     init(record: Record,
          isActionSheetShowing: Bool = false,
          showPhotoPicker: Bool = false,
+         delegate: RecordDetailDelegate,
+         recordIndex: Int,
          imageState: ImageState = .empty,
          imageSelection: PhotosPickerItem? = nil
     ) {
         self.record = record
         self.isActionSheetShowing = isActionSheetShowing
         self.showPhotoPicker = showPhotoPicker
+        self.delegate = delegate
+        self.recordInedx = recordIndex
         self.imageState = imageState
         self.imageSelection = imageSelection
 
@@ -77,6 +88,12 @@ class RecordDetailObservedObject: ObservableObject {
         }
     }
 
+    func updateRecord(image: Image?) {
+        var updateRecord = self.record
+        updateRecord.image = image
+        self.delegate?.setRecord(record: updateRecord, index: self.recordInedx)
+    }
+
     // MARK: - Private Methods
 
     private func loadTransferable(from imageSelection: PhotosPickerItem) -> Progress {
@@ -90,6 +107,7 @@ class RecordDetailObservedObject: ObservableObject {
                 case .success(let image?):
                     self.imageState = .success(image.image)
                     self.certifyingImage = image.image
+                    self.updateRecord(image: image.image)
                 case .success(nil):
                     self.imageState = .empty
                 case .failure(let error):

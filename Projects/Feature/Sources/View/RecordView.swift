@@ -107,9 +107,14 @@ private struct RecordGrid: View {
                     ForEach(startIndex..<endIndex, id: \.self) { index in
                         NavigationLink {
                             RecordDetailView(
-                                observedObject: RecordDetailObservedObject(record: observedObject.records[0][index]))
+                                observedObject:
+                                    RecordDetailObservedObject(
+                                        record: observedObject.records[index],
+                                        delegate: observedObject, recordIndex: index
+                                    )
+                            )
                         } label: {
-                            if let image = observedObject.records[0][index].image {
+                            if let image = observedObject.records[index].image {
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)

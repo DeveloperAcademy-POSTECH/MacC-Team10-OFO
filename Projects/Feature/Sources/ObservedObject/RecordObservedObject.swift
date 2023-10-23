@@ -9,11 +9,14 @@
 import Foundation
 import Core
 
-class RecordObservedObject: ObservableObject {
-    @Published var records: [[Record]]
+class RecordObservedObject: RecordDetailDelegate, ObservableObject {
+    @Published var records: [Record]
 
-    init(records: [[Record]]) {
+    init(records: [Record]) {
         self.records = records
     }
 
+    func setRecord(record: Core.Record, index: Int) {
+        records[index] = record
+    }
 }
