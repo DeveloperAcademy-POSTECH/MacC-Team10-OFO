@@ -9,8 +9,10 @@
 import Foundation
 import SwiftUI
 import PhotosUI
+import Core
 
 class RecordDetailObservedObject: ObservableObject {
+
     @Published var isActionSheetShowing = false
     @Published var showPhotoPicker = false
 
@@ -42,7 +44,6 @@ class RecordDetailObservedObject: ObservableObject {
     }
 
     @Published private(set) var imageState: ImageState = .empty
-
     @Published var imageSelection: PhotosPickerItem? {
         didSet {
             if let imageSelection {
@@ -52,6 +53,21 @@ class RecordDetailObservedObject: ObservableObject {
                 imageState = .empty
             }
         }
+    }
+
+    @Published var record = Record(matchDate: Date(),
+                                   distanceCovered: 4.5,
+                                   calories: 1200,
+                                   goal: PlayerGoals(goalCalories: 1500,
+                                                     goalDistanceCovered: 5),
+                                   playTime: Date())
+
+    var distanceCoveredPercentage: Double {
+        return record.distanceCovered / record.goal.goalDistanceCovered
+    }
+
+    var caloriesPercentage: Double {
+        return record.calories / record.goal.goalCalories
     }
 
     // MARK: - Private Methods
