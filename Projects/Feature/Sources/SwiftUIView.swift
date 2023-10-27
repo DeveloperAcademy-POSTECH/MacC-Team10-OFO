@@ -18,7 +18,7 @@ public struct SwiftUIView: View {
                 .tabItem {
                     Label("기록", systemImage: "rectangle.stack.person.crop").tint(.white)
                 }
-            RecordView()
+            RecordView(observable: RecordObservableObject())
                 .tabItem {
                     Label("갤러리", systemImage: "flame.fill").accentColor(.white)
                 }

@@ -9,7 +9,8 @@ extension Project {
     
     private static let organizationName = "com.kozi"
     private static let iOSTargetVersion = "17.0"
-    
+    private static let watchOSTargetVersion = "10.0"
+
 //    private static let infoPlist: [String: InfoPlist.Value] = [
 //        "CFBundleShortVersionString": "1.0",
 //        "CFBundleVersion": "1",
@@ -22,6 +23,7 @@ extension Project {
         platform: Platform,
         product: Product,
 //        iOSTargetVersion: String,
+        deploymentTarget: DeploymentTarget = .iOS(targetVersion: "17.0", devices: .iphone),
         infoPlist: InfoPlist = .default,
         sources: SourceFilesList = ["Sources/**"],
         resources: ResourceFileElements? = nil,
@@ -34,7 +36,7 @@ extension Project {
             platform: platform,
             product: product,
             bundleId: "com.kozi.\(name.lowercased())",
-            deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
+            deploymentTarget: deploymentTarget,
             infoPlist: infoPlist,
             sources: sources,
             resources: resources,
