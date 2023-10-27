@@ -13,6 +13,7 @@ private let moduleName = "App"
 let project = Project.makeModule(name: moduleName,
                                  platform: .iOS,
                                  product: .app,
+                                 resources: ["Resources/**"],
                                  dependencies: [
                                     .Project.Common,
                                     .Project.Core,

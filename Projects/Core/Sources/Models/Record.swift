@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Foundation
-import Common
 
 public struct Record {
     public let matchDate: Date
@@ -41,75 +40,4 @@ public struct RecordAverage {
     public init(record: [Record]) {
         self.record = record
     }
-}
-
-extension Record {
-    static let mockData1 = Record(
-        matchDate: Date(),
-        distanceCovered: 5.0,
-        calories: 100.0,
-        goal: PlayerGoals(goalCalories: 200.0, goalDistanceCovered: 5.0),
-        playTime: Date()
-    )
-    static let mockData2 = Record(
-        matchDate: Date(),
-        distanceCovered: 5.0,
-        calories: 100.0,
-        goal: PlayerGoals(goalCalories: 200.0, goalDistanceCovered: 5.0),
-        playTime: Date(),
-        image: Image(asset: CommonAsset._2381)
-    )
-    static let mockData3 = Record(
-        matchDate: Date(),
-        distanceCovered: 5.0,
-        calories: 100.0,
-        goal: PlayerGoals(goalCalories: 200.0, goalDistanceCovered: 5.0),
-        playTime: Date(),
-        image: Image(asset: CommonAsset._2382)
-    )
-    static let mockData4 = Record(
-        matchDate: Date(),
-        distanceCovered: 5.0,
-        calories: 100.0,
-        goal: PlayerGoals(goalCalories: 200.0, goalDistanceCovered: 5.0),
-        playTime: Date(),
-        image: Image(asset: CommonAsset._2383)
-    )
-    static let mockData5 = Record(
-        matchDate: Date(),
-        distanceCovered: 5.0,
-        calories: 100.0,
-        goal: PlayerGoals(goalCalories: 200.0, goalDistanceCovered: 5.0),
-        playTime: Date(),
-        image: Image(asset: CommonAsset._2384)
-    )
-    static let mockData6 = Record(
-        matchDate: Date(),
-        distanceCovered: 5.0,
-        calories: 100.0,
-        goal: PlayerGoals(goalCalories: 200.0, goalDistanceCovered: 5.0),
-        playTime: Date(),
-        image: Image(asset: CommonAsset._2385)
-    )
-    public static let mockDatas: [Record] = [
-        .mockData1,
-        .mockData2,
-        .mockData3,
-        .mockData4,
-        .mockData5,
-        .mockData6,
-        .mockData1,
-        .mockData2,
-        .mockData3,
-        .mockData4,
-        .mockData5,
-        .mockData6,
-        .mockData1,
-        .mockData2,
-        .mockData3,
-        .mockData4,
-        .mockData5,
-        .mockData6
-
-    ]
 }

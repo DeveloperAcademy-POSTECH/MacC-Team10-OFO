@@ -9,6 +9,11 @@
 import SwiftUI
 import Common
 
+enum RecordType {
+    case distanceCovered
+    case calories
+}
+
 struct MainView: View {
 
     @ObservedObject var observable = MainObservableObject()
@@ -52,7 +57,7 @@ struct MainView: View {
             .overlay {
                 VStack(spacing: 0) {
                     NavigationLink {
-                        Text("Hi")
+                        MainDetailView()
                     } label: {
                         HStack(spacing: 0) {
                             Text("요약")
@@ -76,7 +81,7 @@ struct MainView: View {
     }
 
     func expProgressBar(
-        type: ProgressBarType,
+        type: RecordType,
         value: Double
     ) -> some View {
 
@@ -95,13 +100,13 @@ struct MainView: View {
             description = "다음 레벨까지 60,000Kcal 남았어요."
         }
         return VStack(spacing: 0) {
-            ProgressView(value: value, 
+            ProgressView(value: value,
                          total: 100) {
                 Text(title)
                     .foregroundColor(.white)
             }
-            .progressViewStyle(BarProgressStyle(color: color))
-            .frame(height: 44)
+                         .progressViewStyle(BarProgressStyle(color: color))
+                         .frame(height: 44)
             HStack {
                 Spacer()
                 Text(description)
@@ -113,11 +118,6 @@ struct MainView: View {
         }
         .padding(.horizontal, 18)
     }
-}
-
-enum ProgressBarType {
-    case distanceCovered
-    case calories
 }
 
 #Preview {

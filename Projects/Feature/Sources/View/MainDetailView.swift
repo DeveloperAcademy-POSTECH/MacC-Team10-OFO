@@ -9,26 +9,23 @@
 import SwiftUI
 
 struct MainDetailView: View {
-    
+
     @ObservedObject var observable = MainDetailViewObservedObject()
-    
+
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color(red: 24 / 255, green: 26 / 255, blue: 31 / 255)
-                    .ignoresSafeArea()
-                VStack(spacing: 20) {
-                    userTotalSummaryCell
-                    userLevelSummaryCell
-                    Spacer()
-                }
-                .navigationBarTitle("기록 요약", displayMode: .inline)
+        ZStack {
+            Color(red: 24 / 255, green: 26 / 255, blue: 31 / 255)
+                .ignoresSafeArea()
+            VStack(spacing: 20) {
+                userTotalSummaryCell
+                userLevelSummaryCell
+                Spacer()
             }
-            .foregroundColor(.white)
+            .navigationBarTitle("기록 요약", displayMode: .inline)
         }
+        .foregroundColor(.white)
     }
 
-    
     var userTotalSummaryCell: some View {
         Rectangle()
             .foregroundColor(Color(red: 47 / 255, green: 48 / 255, blue: 54 / 255))
@@ -84,7 +81,7 @@ struct MainDetailView: View {
             .padding(.horizontal, 16)
             .padding(.top, 30)
     }
-    
+
     var userLevelSummaryCell: some View {
         Rectangle()
             .foregroundColor(Color(red: 47 / 255, green: 48 / 255, blue: 54 / 255))
