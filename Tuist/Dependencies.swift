@@ -11,5 +11,5 @@ import ProjectDescription
 let dependencies = Dependencies(
     carthage: [],
     swiftPackageManager: [],
-    platforms: [.iOS]
+    platforms: [.iOS, .watchOS]
 )
