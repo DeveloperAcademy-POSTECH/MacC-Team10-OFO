@@ -10,6 +10,23 @@ import ProjectDescriptionHelpers
 
 private let moduleName = "App"
 
+//let temp = target
+
+let watchTarget = Target(
+    name: "watchExtension",
+    platform: .watchOS,
+    product: .watch2Extension,
+    bundleId: "com.kozi.watchextension",
+    deploymentTarget: .watchOS(targetVersion: "10.0"),
+    infoPlist: InfoPlist.default,
+    sources: ["Sources/**"],
+    resources: ["Resources/**"],
+    scripts: [.SwiftLintString]
+//    dependencies: [.Project.WatchApp]
+)
+
+//let watchTarget = Target(name: <#T##String#>, platform: <#T##Platform#>, product: <#T##Product#>, bundleId: <#T##String#>)
+
 let project = Project.makeModule(name: moduleName,
                                  platform: .iOS,
                                  product: .app,
@@ -18,4 +35,6 @@ let project = Project.makeModule(name: moduleName,
                                     .Project.Common,
                                     .Project.Core,
                                     .Project.Feature
-                                 ])
+                                 ],
+                                 target: watchTarget
+)
