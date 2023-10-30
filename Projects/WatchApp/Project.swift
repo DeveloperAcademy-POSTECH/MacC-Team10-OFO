@@ -16,7 +16,7 @@ let infoPlist: [String: Plist.Value] = [
     "UIMainStoryboardFile": "",
     "UILaunchStoryboardName": "LaunchScreen",
     "WKApplication": true,
-    "WKCompanionAppBundleIdenfier": "com.kozi.app.watchapp"
+    "WKCompanionAppBundleIdentifier": "com.kozi.watchapp"
 ]
 //infoPlist
 
@@ -26,5 +26,6 @@ let project = Project.makeModule(name: moduleName,
                                  platform: .watchOS,
                                  product: .app,
                                  deploymentTarget: .watchOS(targetVersion: "10.0"),
+                                 infoPlist: .extendingDefault(with: infoPlist),
                                  resources: ["Resources/**"]
 )

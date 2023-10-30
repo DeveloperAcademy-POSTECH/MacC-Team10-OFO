@@ -11,6 +11,14 @@ import ProjectDescriptionHelpers
 private let moduleName = "App"
 
 //let temp = target
+let infoPlist: [String: Plist.Value] = [
+    "CFBundleShortVersionString": "1.0",
+    "CFBundleVersion": "1",
+    "UIMainStoryboardFile": "",
+    "UILaunchStoryboardName": "LaunchScreen",
+    "WKApplication": true,
+    "WKCompanionAppBundleIdenfier": "com.kozi.app.watchapp"
+]
 
 let watchTarget = Target(
     name: "watchExtension",
@@ -18,7 +26,7 @@ let watchTarget = Target(
     product: .watch2Extension,
     bundleId: "com.kozi.watchextension",
     deploymentTarget: .watchOS(targetVersion: "10.0"),
-    infoPlist: InfoPlist.default,
+    infoPlist: .extendingDefault(with: infoPlist),
     sources: ["Sources/**"],
     resources: ["Resources/**"],
     scripts: [.SwiftLintString]
