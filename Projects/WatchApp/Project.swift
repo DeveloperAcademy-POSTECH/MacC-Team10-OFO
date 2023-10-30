@@ -13,6 +13,6 @@ let moduleName = "WatchApp"
 let project = Project.makeModule(name: moduleName,
                                  platform: .watchOS,
                                  product: .app,
-                                 deploymentTarget: .watchOS(targetVersion: "10.0"),
+                                 deploymentTarget: .watchOS(targetVersion: "10.0"), infoPlist: .file(path: .relativeToRoot("Projects/WatchApp/Info.plist")),
                                  resources: ["Resources/**"]
 )
