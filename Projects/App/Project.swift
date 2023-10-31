@@ -10,7 +10,6 @@ import ProjectDescriptionHelpers
 
 private let moduleName = "App"
 
-//let temp = target
 let infoPlist: [String: Plist.Value] = [
     "CFBundleShortVersionString": "1.0",
     "CFBundleVersion": "1",
@@ -32,18 +31,16 @@ let watchTarget = Target(
     dependencies: [.project(target: "WatchApp", path: .relativeToRoot("Projects/WatchApp"))]
 )
 
-
 let project = Project.makeModule(name: moduleName,
                                  platform: .iOS,
                                  product: .app,
+                                 bundleId: "app",
                                  resources: ["Resources/**"],
                                  dependencies: [
                                     .Project.Common,
                                     .Project.Core,
                                     .Project.Feature,
-                                    TargetDependency.project(target: "WatchExtension_App", path: .relativeToRoot("Projects/App"))
+                                    .Project.WatchExtension
                                  ],
                                  target: watchTarget
 )
-
-

@@ -7,15 +7,15 @@ import ProjectDescription
 
 extension Project {
     
-    private static let organizationName = "com.kozi"
-    private static let iOSTargetVersion = "17.0"
-    private static let watchOSTargetVersion = "10.0"
-    
+    private static let organizationName = "com.kozi."
+
     public static func makeModule(
         name: String,
         platform: Platform,
         product: Product,
-        deploymentTarget: DeploymentTarget = .iOS(targetVersion: "17.0", devices: .iphone),
+        bundleId: String,
+        deploymentTarget: DeploymentTarget = .iOS(targetVersion: "17.0",
+                                                  devices: .iphone),
         infoPlist: InfoPlist = .default,
         sources: SourceFilesList = ["Sources/**"],
         resources: ResourceFileElements? = nil,
@@ -29,7 +29,7 @@ extension Project {
             name: name,
             platform: platform,
             product: product,
-            bundleId: "com.kozi.\(name.lowercased())",
+            bundleId: organizationName + bundleId,
             deploymentTarget: deploymentTarget,
             infoPlist: infoPlist,
             sources: sources,
@@ -63,18 +63,13 @@ extension Project {
 
     public static func makeWatch(
         name: String,
-        platform: Platform,
-        product: Product,
-        deploymentTarget: DeploymentTarget = .watchOS(targetVersion: "10.0"),
         infoPlist: [String: Plist.Value],
         sources: SourceFilesList = ["Sources/**"],
         resources: ResourceFileElements? = nil,
-        dependencies: [TargetDependency] = [],
-        target: Target? = nil
+        dependencies: [TargetDependency] = []
     )
     -> Project
     {
-
         let watchTarget = Target(
             name: "WatchApp",
             platform: .watchOS,
@@ -83,8 +78,9 @@ extension Project {
             deploymentTarget: .watchOS(targetVersion: "10.0"),
             infoPlist: .extendingDefault(with: infoPlist),
             sources: sources,
-            scripts: [],
-            dependencies: []
+            resources: resources,
+            scripts: [.SwiftLintString],
+            dependencies: dependencies
         )
 
         let testTarget = Target(

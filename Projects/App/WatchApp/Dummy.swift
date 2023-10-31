@@ -12,4 +12,3 @@ struct ContentsView: View {
         Text("Hi")
     }
 }
-

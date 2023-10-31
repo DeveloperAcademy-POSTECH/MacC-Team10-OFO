@@ -18,23 +18,9 @@ let infoPlist: [String: Plist.Value] = [
     "WKApplication": true,
     "WKCompanionAppBundleIdentifier": "com.kozi.watchapp"
 ]
-//infoPlist
 
-//let temp = infoplist
-
-let watchTarget = Target(
-    name: "WatchExtension_App",
-    platform: .watchOS,
-    product: .app,
-    bundleId: "com.kozi.watchTarget.app",
-    deploymentTarget: .watchOS(targetVersion: "10.0"),
-    infoPlist: .extendingDefault(with: infoPlist),
-    sources: ["WatchExtension/**"],
-    scripts: [],
-    dependencies: []
-)
-
-let project = Project.makeWatch(name: "WatchApp",
-                                platform: .watchOS,
-                                product: .app,
-                                infoPlist: infoPlist)
+let project = Project.makeWatch(name: moduleName,
+                                infoPlist: infoPlist,
+                                sources: ["Sources/**"],
+                                resources: ["Resources/**"],
+                                dependencies: [])
