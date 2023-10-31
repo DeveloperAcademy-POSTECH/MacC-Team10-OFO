@@ -19,12 +19,13 @@ extension Project {
         infoPlist: InfoPlist = .default,
         sources: SourceFilesList = ["Sources/**"],
         resources: ResourceFileElements? = nil,
+        entitlements: Entitlements? = nil,
         dependencies: [TargetDependency] = [],
         target: Target? = nil
     )
     -> Project
     {
-        
+
         let mainTarget = Target(
             name: name,
             platform: platform,
@@ -34,6 +35,7 @@ extension Project {
             infoPlist: infoPlist,
             sources: sources,
             resources: resources,
+            entitlements: entitlements,
             scripts: [.SwiftLintString],
             dependencies: dependencies
         )

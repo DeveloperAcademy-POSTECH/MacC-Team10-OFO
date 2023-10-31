@@ -34,6 +34,7 @@ let watchTarget = Target(
     deploymentTarget: .watchOS(targetVersion: "10.0"),
     infoPlist: .extendingDefault(with: watchInfoPlist),
     sources: ["WatchExtension/**"],
+    entitlements: "WatchExtension_App.entitlements",
     scripts: [],
     dependencies: [.project(target: "WatchApp", path: .relativeToRoot("Projects/WatchApp"))]
 )
@@ -44,6 +45,7 @@ let project = Project.makeModule(name: moduleName,
                                  bundleId: "app",
                                  infoPlist: .extendingDefault(with: infoPlist),
                                  resources: ["Resources/**"],
+                                 entitlements: "App.entitlements",
                                  dependencies: [
                                     .Project.Common,
                                     .Project.Core,
