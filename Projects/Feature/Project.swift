@@ -13,6 +13,7 @@ private let moduleName = "Feature"
 let project = Project.makeModule(name: moduleName,
                                  platform: .iOS,
                                  product: .staticFramework,
+                                 bundleId: "Feature",
                                  dependencies: [
                                     .Project.Common,
                                     .Project.Core

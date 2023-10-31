@@ -12,4 +12,5 @@ private let moduleName = "Core"
 
 let project = Project.makeModule(name: moduleName,
                                  platform: .iOS,
-                                 product: .staticFramework)
+                                 product: .staticFramework,
+                                 bundleId: "Core")
