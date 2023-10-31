@@ -10,39 +10,45 @@ import ProjectDescriptionHelpers
 
 private let moduleName = "App"
 
-//let temp = target
-let infoPlist: [String: Plist.Value] = [
+let watchInfoPlist: [String: Plist.Value] = [
     "CFBundleShortVersionString": "1.0",
     "CFBundleVersion": "1",
     "UIMainStoryboardFile": "",
     "UILaunchStoryboardName": "LaunchScreen",
     "WKApplication": true,
-    "WKCompanionAppBundleIdenfier": "com.kozi.app.watchapp"
+    "WKCompanionAppBundleIdentifier": "com.kozi.app"
+]
+
+let infoPlist: [String: Plist.Value] = [
+    "CFBundleShortVersionString": "1.0",
+    "CFBundleVersion": "1",
+    "UIMainStoryboardFile": "",
+    "UILaunchStoryboardName": "LaunchScreen"
 ]
 
 let watchTarget = Target(
-    name: "watchExtension",
+    name: "WatchExtension_App",
     platform: .watchOS,
-    product: .watch2Extension,
-    bundleId: "com.kozi.watchextension",
+    product: .app,
+    bundleId: "com.kozi.app.extension",
     deploymentTarget: .watchOS(targetVersion: "10.0"),
-    infoPlist: .extendingDefault(with: infoPlist),
-    sources: ["Sources/**"],
-    resources: ["Resources/**"],
-    scripts: [.SwiftLintString]
-//    dependencies: [.Project.WatchApp]
+    infoPlist: .extendingDefault(with: watchInfoPlist),
+    sources: ["WatchExtension/**"],
+    scripts: [],
+    dependencies: [.project(target: "WatchApp", path: .relativeToRoot("Projects/WatchApp"))]
 )
-
-//let watchTarget = Target(name: <#T##String#>, platform: <#T##Platform#>, product: <#T##Product#>, bundleId: <#T##String#>)
 
 let project = Project.makeModule(name: moduleName,
                                  platform: .iOS,
                                  product: .app,
+                                 bundleId: "app",
+                                 infoPlist: .extendingDefault(with: infoPlist),
                                  resources: ["Resources/**"],
                                  dependencies: [
                                     .Project.Common,
                                     .Project.Core,
-                                    .Project.Feature
+                                    .Project.Feature,
+                                    .Project.WatchExtension
                                  ],
                                  target: watchTarget
 )
