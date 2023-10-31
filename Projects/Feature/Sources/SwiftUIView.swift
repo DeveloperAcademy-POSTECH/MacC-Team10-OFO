@@ -24,6 +24,5 @@ public struct SwiftUIView: View {
                 }
         }
         .accentColor(.white)
-        .environment(\.colorScheme, .dark)
     }
 }
