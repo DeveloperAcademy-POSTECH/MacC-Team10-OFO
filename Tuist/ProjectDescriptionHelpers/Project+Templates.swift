@@ -63,7 +63,7 @@ extension Project {
     }
 
 
-    public static func makeWatch(
+    public static func makeWatchModule(
         name: String,
         infoPlist: [String: Plist.Value],
         sources: SourceFilesList = ["Sources/**"],

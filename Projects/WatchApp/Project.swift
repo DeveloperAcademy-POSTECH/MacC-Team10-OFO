@@ -19,8 +19,8 @@ let infoPlist: [String: Plist.Value] = [
     "WKCompanionAppBundleIdentifier": "com.kozi.watchapp"
 ]
 
-let project = Project.makeWatch(name: moduleName,
-                                infoPlist: infoPlist,
-                                sources: ["Sources/**"],
-                                resources: ["Resources/**"],
-                                dependencies: [])
+let project = Project.makeWatchModule(name: moduleName,
+                                      infoPlist: infoPlist,
+                                      sources: ["Sources/**"],
+                                      resources: ["Resources/**"],
+                                      dependencies: [])
