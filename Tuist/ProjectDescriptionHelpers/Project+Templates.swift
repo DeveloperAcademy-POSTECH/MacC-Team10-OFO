@@ -22,7 +22,6 @@ extension Project {
         name: String,
         platform: Platform,
         product: Product,
-//        iOSTargetVersion: String,
         deploymentTarget: DeploymentTarget = .iOS(targetVersion: "17.0", devices: .iphone),
         infoPlist: InfoPlist = .default,
         sources: SourceFilesList = ["Sources/**"],
@@ -45,8 +44,6 @@ extension Project {
             scripts: [.SwiftLintString],
             dependencies: dependencies
         )
-
-
 
         let testTarget = Target(
             name: "\(name)Tests",

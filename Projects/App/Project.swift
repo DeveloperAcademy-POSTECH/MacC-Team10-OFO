@@ -17,23 +17,21 @@ let infoPlist: [String: Plist.Value] = [
     "UIMainStoryboardFile": "",
     "UILaunchStoryboardName": "LaunchScreen",
     "WKApplication": true,
-    "WKCompanionAppBundleIdenfier": "com.kozi.app.watchapp"
+    "WKCompanionAppBundleIdentifier": "com.kozi.watchTarget"
 ]
 
+
 let watchTarget = Target(
-    name: "watchExtension",
+    name: "watchApp",
     platform: .watchOS,
-    product: .watch2Extension,
-    bundleId: "com.kozi.watchextension",
+    product: .app,
+    bundleId: "com.kozi.watchTarget.app",
     deploymentTarget: .watchOS(targetVersion: "10.0"),
     infoPlist: .extendingDefault(with: infoPlist),
-    sources: ["Sources/**"],
-    resources: ["Resources/**"],
-    scripts: [.SwiftLintString]
-//    dependencies: [.Project.WatchApp]
+    sources: ["WatchApp/**"],
+    scripts: [],
+    dependencies: []
 )
-
-//let watchTarget = Target(name: <#T##String#>, platform: <#T##Platform#>, product: <#T##Product#>, bundleId: <#T##String#>)
 
 let project = Project.makeModule(name: moduleName,
                                  platform: .iOS,
@@ -42,7 +40,8 @@ let project = Project.makeModule(name: moduleName,
                                  dependencies: [
                                     .Project.Common,
                                     .Project.Core,
-                                    .Project.Feature
+                                    .Project.Feature,
+                                    .target(name: "watchApp")
                                  ],
                                  target: watchTarget
 )
