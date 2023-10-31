@@ -10,140 +10,169 @@ import Common
 
 public struct RecordView: View {
 
-    @ObservedObject var observable: RecordObservableObject
-
-    let recordCounts: [String: Int] = [
-        "2023년 9월": 6,
-        "2023년 8월": 7
-    ]
-
-    let columns = [
-        GridItem(.adaptive(minimum: 100, maximum: 100))
-    ]
-
-    //    mock ::: 이미지 데이터가 없는 경우
-    //    let recordCounts: [String: Int] = [:]
-
-    //    public init() {
-    //
-    //    }
-
     public var body: some View {
         NavigationView {
-            // 이미지 데이터가 없는 경우
-            ZStack {
-                Color(red: 24 / 255, green: 26 / 255, blue: 31 / 255)
-                    .ignoresSafeArea()
-                if observable.records.isEmpty {
-                    VStack {
-                        Spacer()
-                        Text("아직 운동 기록이 존재하지 않아요.")
-                            .font(.subheadline)
-                        Spacer()
-                    }
-                } else {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 16) {
-                            ForEach(recordCounts.keys.sorted(by: >), id: \.self) { month in
-                                Section(header: Text(month).font(.subheadline)) {
-                                    RecordGrid(observable: observable, recordCount: recordCounts[month, default: 0],
-                                               recordMonth: month.replacingOccurrences(of: "년 ", with: "_")
-                                        .replacingOccurrences(of: "월", with: ""))
-                                    .padding(.bottom, 15)
-                                }
-                            }
-                        }
-                        .padding(.top, 40)
-                        .navigationTitle("갤러리")
+            ScrollView {
+                // 전체 누적 정보(2x2 그리드)
+                HStack {
+                    Text("전체")
+                        .font(.system(size: 20))
+                        .fontWeight(.bold)
+                        .padding(.leading, 20)
+                    Spacer()
+                }
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: 11),
+                                    GridItem(.flexible(), spacing: 12)],
+                          spacing: 10) {
+                    OverallRecordCell(titleText: Text("경기"), overallSumData: Text("121"))
+                    OverallRecordCell(titleText: Text("누적 칼로리"), overallSumData: Text("156,654"))
+                    OverallRecordCell(titleText: Text("누적 플레이 타임"), overallSumData: Text("217시간 31분"))
+                    OverallRecordCell(titleText: Text("누적 이동거리(KM)"), overallSumData: Text("366.6"))
+                }
+                          .padding(.leading, 20)
+                          .padding(.trailing, 20)
+
+                // 경기별 정보(동적으로 경기별 기록 셀 추가)
+                HStack {
+                    Text("경기")
+                        .font(.system(size: 20))
+                        .fontWeight(.bold)
+                        .padding(.leading, 20)
+                    Spacer()
+                }
+                .padding(.top, 20)
+                .padding(.bottom, 12)
+
+                DailyRecordCell(dailyRecordDate: Text("2023년 10월 30일"),
+                                dailyRecordDay: Text("화요일 경기"),
+                                dailyRecordTime: Text("1시간 57분 31초"),
+                                dailyRecordCalorie: Text("1,200 칼로리"),
+                                dailyRecordDistance: Text("3.45KM"))
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
+            }.background(Color(.systemGroupedBackground))
+                .toolbar {
+                    Button {
+                        print("tap!")
+                    } label: {
+                        Label("Profile", systemImage: "ellipsis.circle")
                     }
                 }
-            }
         }
     }
 }
 
-// 레코드 그리드
-private struct RecordGrid: View {
+// 전체 누적 정보별 Cell
+public struct OverallRecordCell: View {
 
-    var observable: RecordObservableObject
+    private var titleText: Text = Text("")
+    private var overallSumData: Text = Text("")
 
-    let recordCount: Int
-    let recordMonth: String
-
-    private var rows: Int {
-        (recordCount + 3) / 4
+    public init(titleText: Text,
+                overallSumData: Text) {
+        self.titleText = titleText
+        self.overallSumData = overallSumData
     }
 
-    // 기기별 사이즈 대응
-    private var imageDimensions: (width: CGFloat, height: CGFloat) {
-        let sidePadding: CGFloat = 5
-        let totalSpacing: CGFloat = sidePadding * 2 + 3 * 10
-        let imageWidth = (UIScreen.main.bounds.width - totalSpacing) / 4
-        let imageHeight = imageWidth * 1.77
-        return (imageWidth, imageHeight)
-    }
-
-    // mockImage ::: 추후 삭제 예정
-    private let mockImages = [
-        CommonAsset._2381,
-        CommonAsset._2382,
-        CommonAsset._2383,
-        CommonAsset._2384,
-        CommonAsset._2385,
-        CommonAsset._2386,
-        CommonAsset._2387,
-        CommonAsset._2391,
-        CommonAsset._2392,
-        CommonAsset._2393,
-        CommonAsset._2394,
-        CommonAsset._2394,
-        CommonAsset._2395,
-        CommonAsset._2396
-
-    ]
-
-    var body: some View {
-        VStack(spacing: 8) {
-            ForEach(0..<rows, id: \.self) { rowIndex in
-                HStack {
-                    let startIndex = rowIndex * 4
-                    let endIndex = min(startIndex + 4, recordCount)
-
-                    // 실 이미지 표시
-                    ForEach(startIndex..<endIndex, id: \.self) { index in
-                        NavigationLink {
-                            RecordDetailView(
-                                observable:
-                                    RecordDetailObservableObject(
-                                        record: observable.records[index],
-                                        delegate: observable, recordIndex: index
-                                    )
-                            )
-                        } label: {
-                            if let image = observable.records[index].image {
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: imageDimensions.width, height: imageDimensions.height)
-                                    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 4, height: 4)))
-                            } else {
-                                Image(asset: mockImages[6])
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: imageDimensions.width, height: imageDimensions.height)
-                                    .background(Color.yellow)
-                                    .cornerRadius(4)
-                            }
-                        }
-                    }
-
-                    // 투명 이미지(left align 목적)
-                    ForEach(endIndex..<startIndex + 4, id: \.self) { _ in
-                        Color.clear
-                            .frame(width: imageDimensions.width, height: imageDimensions.height)
-                    }
-                }
+    public var body: some View {
+        VStack {
+            HStack {
+                titleText
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color(red: 0.4, green: 0.4, blue: 0.4))
+                Spacer()
+            }
+            .padding(.top, 12)
+            .padding(.leading, 12)
+            Spacer()
+            HStack {
+                Spacer()
+                overallSumData
+                    .padding(.bottom, 12)
+                    .padding(.trailing, 12)
+                    .font(.body)
+                    .fontWeight(.bold)
             }
         }
+        .frame(height: 90)
+        .background(Color.white)
+        .cornerRadius(12)
     }
+
+}
+
+// 개별 경기별 Cell
+public struct DailyRecordCell: View {
+
+    private var dailyRecordDate: Text = Text("2023년 10월 30일")
+    private var dailyRecordDay: Text = Text("화요일 경기")
+    private var dailyRecordTime: Text = Text("1시간 57분 31초")
+    private var dailyRecordCalorie: Text = Text("1,200 칼로리")
+    private var dailyRecordDistance: Text = Text("3.45KM")
+
+    public init(dailyRecordDate: Text,
+                dailyRecordDay: Text,
+                dailyRecordTime: Text,
+                dailyRecordCalorie: Text,
+                dailyRecordDistance: Text) {
+        self.dailyRecordDate = dailyRecordDate
+        self.dailyRecordDay = dailyRecordDay
+        self.dailyRecordTime = dailyRecordTime
+        self.dailyRecordCalorie = dailyRecordCalorie
+        self.dailyRecordDistance = dailyRecordDistance
+    }
+
+    public var body: some View {
+        VStack {
+            HStack {
+                dailyRecordDate
+                    .font(.system(size: 14))
+                    .foregroundStyle(Color(red: 0.26, green: 0.26, blue: 0.26))
+                Spacer()
+                dailyRecordDay
+                    .font(.system(size: 14))
+                    .fontWeight(.semibold)
+                    .padding(.trailing, 16)
+            }
+            .padding(.top, 11)
+            .padding(.leading, 16)
+
+            Spacer()
+
+            VStack {
+                HStack {
+                    dailyRecordCalorie
+                        .padding(.leading, 16)
+                        .padding(.trailing, 4)
+                        .fontWeight(.bold)
+                    Text("/ 1,350 칼로리")
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color(red: 0.6, green: 0.6, blue: 0.6))
+                    Spacer()
+                }
+                .padding(.bottom, 8)
+                HStack {
+                    dailyRecordDistance
+                        .padding(.leading, 16)
+                        .padding(.trailing, 4)
+                        .fontWeight(.bold)
+                    Text("/ 4KM")
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color(red: 0.6, green: 0.6, blue: 0.6))
+                    Spacer()
+                    dailyRecordTime
+                        .font(.system(size: 12))
+                        .fontWeight(.semibold)
+                        .padding(.trailing, 16)
+                }
+                .padding(.bottom, 8)
+            }
+            .padding(.top, 11)
+
+        }
+        .frame(height: 138)
+        .background(Color.white)
+        .cornerRadius(12)
+    }
+
 }
