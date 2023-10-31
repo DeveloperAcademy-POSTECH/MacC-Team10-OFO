@@ -10,7 +10,7 @@ import ProjectDescriptionHelpers
 
 private let moduleName = "App"
 
-let infoPlist: [String: Plist.Value] = [
+let watchInfoPlist: [String: Plist.Value] = [
     "CFBundleShortVersionString": "1.0",
     "CFBundleVersion": "1",
     "UIMainStoryboardFile": "",
@@ -19,13 +19,20 @@ let infoPlist: [String: Plist.Value] = [
     "WKCompanionAppBundleIdentifier": "com.kozi.app"
 ]
 
+let infoPlist: [String: Plist.Value] = [
+    "CFBundleShortVersionString": "1.0",
+    "CFBundleVersion": "1",
+    "UIMainStoryboardFile": "",
+    "UILaunchStoryboardName": "LaunchScreen"
+]
+
 let watchTarget = Target(
     name: "WatchExtension_App",
     platform: .watchOS,
     product: .app,
     bundleId: "com.kozi.app.extension",
     deploymentTarget: .watchOS(targetVersion: "10.0"),
-    infoPlist: .extendingDefault(with: infoPlist),
+    infoPlist: .extendingDefault(with: watchInfoPlist),
     sources: ["WatchExtension/**"],
     scripts: [],
     dependencies: [.project(target: "WatchApp", path: .relativeToRoot("Projects/WatchApp"))]
@@ -35,6 +42,7 @@ let project = Project.makeModule(name: moduleName,
                                  platform: .iOS,
                                  product: .app,
                                  bundleId: "app",
+                                 infoPlist: .extendingDefault(with: infoPlist),
                                  resources: ["Resources/**"],
                                  dependencies: [
                                     .Project.Common,
