@@ -27,7 +27,9 @@ extension Project {
         infoPlist: InfoPlist = .default,
         sources: SourceFilesList = ["Sources/**"],
         resources: ResourceFileElements? = nil,
-        dependencies: [TargetDependency] = [])
+        dependencies: [TargetDependency] = [],
+        target: Target? = nil
+    )
     -> Project
     {
         
@@ -57,8 +59,12 @@ extension Project {
                 .target(name: "\(name)")
             ])
 
-        let targets: [Target] = [mainTarget, testTarget]
-        
+        var targets: [Target] = [mainTarget, testTarget]
+
+        if let target = target {
+            targets.append(target)
+        }
+
         return Project(name: name,
                        organizationName: organizationName,
                        targets: targets)
