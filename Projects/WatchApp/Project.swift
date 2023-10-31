@@ -22,10 +22,19 @@ let infoPlist: [String: Plist.Value] = [
 
 //let temp = infoplist
 
-let project = Project.makeModule(name: moduleName,
-                                 platform: .watchOS,
-                                 product: .app,
-                                 deploymentTarget: .watchOS(targetVersion: "10.0"),
-                                 infoPlist: .extendingDefault(with: infoPlist),
-                                 resources: ["Resources/**"]
+let watchTarget = Target(
+    name: "WatchExtension_App",
+    platform: .watchOS,
+    product: .app,
+    bundleId: "com.kozi.watchTarget.app",
+    deploymentTarget: .watchOS(targetVersion: "10.0"),
+    infoPlist: .extendingDefault(with: infoPlist),
+    sources: ["WatchExtension/**"],
+    scripts: [],
+    dependencies: []
 )
+
+let project = Project.makeWatch(name: "WatchApp",
+                                platform: .watchOS,
+                                product: .app,
+                                infoPlist: infoPlist)

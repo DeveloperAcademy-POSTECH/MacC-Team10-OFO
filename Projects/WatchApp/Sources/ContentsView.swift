@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-public struct ContentsView: View {
+public struct WatchView: View {
 
     public init() {}
 
     public var body: some View {
         VStack {
-            Text("Hello, SwiftUI!")
+            Text("Hello!")
         }
         .accentColor(.white)
         .environment(\.colorScheme, .dark)
