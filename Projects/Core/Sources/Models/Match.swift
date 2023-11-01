@@ -12,15 +12,17 @@ import SwiftData
 @Model
 public final class Match {
     public let id: UUID // id == HKStore.id
-    public let matchDate: Date
-    public let distanceCovered: Double
-    public let calories: Double
-    public let playTime: Date
+    public var matchDate: Date
+    public var distanceCovered: Double
+    public var calories: Double
+    public var playTime: Date
     public var image: Image?
-    public let goal: PlayerGoals
+    public var goal: PlayerGoals
+    
+    public var record: Record
 
     public init(
-        id: UUID
+        id: UUID,
         matchDate: Date,
         distanceCovered: Double,
         calories: Double,
