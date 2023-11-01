@@ -7,52 +7,39 @@
 //
 
 import Foundation
+import SwiftData
 
-public struct Player {
-    public let height: Int
-    public let weight: Int
-    public let birth: Date
-    public let gender: GenderType
-    public let goal: PlayerGoals
-    public let statistics: PlayerStatistics
-    public let average: RecordAverage
+@Model
+public final class Player {
+    public var height: Int
+    public var weight: Int
+    public var birth: Date
+    public var gender: GenderType
+    public var goal: PlayerGoals
 
-    public init(height: Int,
-                weight: Int,
-                birth: Date,
-                gender: GenderType,
-                goal: PlayerGoals,
-                statistics: PlayerStatistics,
-                average: RecordAverage) {
+    public init(
+        height: Int,
+        weight: Int,
+        birth: Date,
+        gender: GenderType,
+        goal: PlayerGoals
+    ) {
         self.height = height
         self.weight = weight
         self.birth = birth
         self.gender = gender
         self.goal = goal
-        self.statistics = statistics
-        self.average = average
-    }
-}
-
-public struct PlayerStatistics {
-    public let totalDistanceCovered: Double
-    public let totalCalories: Double
-    public let totalPlayTime: Date
-    public let totalPlay: Int
-
-    public init(totalDistanceCovered: Double, totalCalories: Double, totalPlayTime: Date, totalPlay: Int) {
-        self.totalDistanceCovered = totalDistanceCovered
-        self.totalCalories = totalCalories
-        self.totalPlayTime = totalPlayTime
-        self.totalPlay = totalPlay
     }
 }
 
 public struct PlayerGoals {
-    public let goalCalories: Double
-    public let goalDistanceCovered: Double
+    public var goalCalories: Double
+    public var goalDistanceCovered: Double
 
-    public init(goalCalories: Double, goalDistanceCovered: Double) {
+    public init(
+        goalCalories: Double,
+        goalDistanceCovered: Double
+    ) {
         self.goalCalories = goalCalories
         self.goalDistanceCovered = goalDistanceCovered
     }
