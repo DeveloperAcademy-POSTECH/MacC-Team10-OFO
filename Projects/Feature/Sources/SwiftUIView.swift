@@ -16,14 +16,14 @@ public struct SwiftUIView: View {
         TabView {
             MainView()
                 .tabItem {
-                    Label("기록", systemImage: "rectangle.stack.person.crop").tint(.white)
+                    Label("홈", systemImage: "flame.fill")
                 }
-            RecordView(observable: RecordObservableObject())
+            RecordView()
                 .tabItem {
-                    Label("갤러리", systemImage: "flame.fill").accentColor(.white)
+                    Label("기록", systemImage: "person.crop.rectangle.stack")
                 }
+                .background(Color(.systemGroupedBackground))
         }
-        .accentColor(.white)
-        .environment(\.colorScheme, .dark)
+        .accentColor(.black)
     }
 }
