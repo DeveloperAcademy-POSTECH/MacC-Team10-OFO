@@ -39,7 +39,7 @@ class WorkoutManager: NSObject, ObservableObject {
         ]
 
         // Request authorization for those quantity types.
-        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
+        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (_, _) in    // (success, error) in
             // Handle error.
         }
     }
@@ -72,7 +72,7 @@ class WorkoutManager: NSObject, ObservableObject {
         // Start the workout session and begin data collection.
         let startDate = Date()
         session?.startActivity(with: startDate)
-        builder?.beginCollection(withStart: startDate) { (success, error) in
+        builder?.beginCollection(withStart: startDate) { (_, _) in    // (success, error) in
             // The workout has started.
         }
     }
@@ -153,8 +153,8 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
         print("workoutSession - toState : \(toState)")
         // Wait for the session to transition states before ending the builder.
         if toState == .ended {
-            builder?.endCollection(withEnd: date) { (success, error) in
-                self.builder?.finishWorkout { (workout, error) in
+            builder?.endCollection(withEnd: date) { (_, _) in // (success, error) in
+                self.builder?.finishWorkout { (workout, _) in   // (workout, error) in
                     DispatchQueue.main.async {
                         self.workout = workout // 동작한 workout이 어떤 workout인지 확인하고 파라미터로 받을 수 있습니다.
                     }

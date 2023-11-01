@@ -16,7 +16,7 @@ struct ElapsedTimeView: View {
     var body: some View {
         Text(NSNumber(value: elapsedTime), formatter: timeFormatter)
             .fontWeight(.semibold)
-            .onChange(of: showSubseconds, { oldValue, newValue in
+            .onChange(of: showSubseconds, { oldValue, _ in  // oldValue, newValue in
                 timeFormatter.showSubseconds = oldValue
             })
     }

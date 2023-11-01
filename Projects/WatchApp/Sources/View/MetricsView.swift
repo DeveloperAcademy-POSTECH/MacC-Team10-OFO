@@ -16,12 +16,17 @@ struct MetricsView: View {
             from: workoutManager.builder?.startDate ?? Date(),
             isPaused: workoutManager.session?.state == .paused)) { context in
             VStack(alignment: .leading) {
-                ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0, showSubseconds: context.cadence == .live)
+                ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0,
+                                showSubseconds: context.cadence == .live)
                     .foregroundStyle(.yellow)
-                Text(Measurement(value: workoutManager.activeEnergy, unit: UnitEnergy.kilocalories)
-                        .formatted(.measurement(width: .abbreviated, usage: .workout, numberFormatStyle: .number.precision(.fractionLength(0)))))
+                Text(Measurement(value: workoutManager.activeEnergy,
+                                 unit: UnitEnergy.kilocalories)
+                        .formatted(.measurement(width: .abbreviated,
+                                                usage: .workout,
+                                                numberFormatStyle: .number.precision(.fractionLength(0)))))
                 Text(workoutManager.heartRate.formatted(.number.precision(.fractionLength(0))) + " bpm")
-                Text(Measurement(value: workoutManager.distance, unit: UnitLength.meters).formatted(.measurement(width: .abbreviated, usage: .road)))
+                Text(Measurement(value: workoutManager.distance,
+                                 unit: UnitLength.meters).formatted(.measurement(width: .abbreviated, usage: .road)))
             }
             .font(.system(.title, design: .rounded).monospacedDigit().lowercaseSmallCaps())
             .frame(maxWidth: .infinity, alignment: .leading)
