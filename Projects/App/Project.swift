@@ -27,7 +27,9 @@ let infoPlist: [String: Plist.Value] = [
     "CFBundleShortVersionString": "1.0",
     "CFBundleVersion": "1",
     "UIMainStoryboardFile": "",
-    "UILaunchStoryboardName": "LaunchScreen"
+    "UILaunchStoryboardName": "LaunchScreen",
+    "NSHealthShareUsageDescription": "Your workout related data will be used to display your saved workouts in MyWorkouts.",
+    "NSHealthUpdateUsageDescription": "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit."
 ]
 
 let watchTarget = Target(
