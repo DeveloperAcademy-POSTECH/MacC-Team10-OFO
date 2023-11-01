@@ -5,9 +5,11 @@
 //  Created by Ha Jong Myeong on 10/22/23.
 //
 
+import Core
 import os
 import SwiftUI
 import HealthKit
+import HealthKitUI
 
 public struct RecordView: View {
     @Environment(\.dismiss) var dismiss
@@ -113,7 +115,7 @@ public struct RecordView: View {
             sum + workout.duration
         }
         totalDistance = workouts.reduce(0.0) { sum, workout in
-            sum + workout.totalCyclingDistance
+            sum + workout.distance
         }
     }
 
