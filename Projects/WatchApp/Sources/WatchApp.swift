@@ -11,8 +11,7 @@ import SwiftUI
 struct WatchApp: App {
     var body: some Scene {
         WindowGroup {
-            WatchView()
-                .environment(\.colorScheme, .dark)
+            StartView()
         }
     }
 }
