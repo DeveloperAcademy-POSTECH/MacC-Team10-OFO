@@ -16,7 +16,7 @@ struct SessionPagingView: View {
     }
     var body: some View {
         TabView(selection: $selection,
-                content:  {
+                content: {
             ControlsView().tag(Tab.controls)
             MetricsView().tag(Tab.metrics)
         })

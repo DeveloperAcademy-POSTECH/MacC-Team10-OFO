@@ -11,7 +11,7 @@ import SwiftUI
 struct MetricsView: View {
     var body: some View {
         TimelineView(MetricsTimelineSchedule(
-            from:  Date(),
+            from: Date(),
             isPaused: true)) { context in
             VStack(alignment: .leading) {
                 Text("00:00.00")
