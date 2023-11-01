@@ -108,6 +108,7 @@ class WorkoutManager: NSObject, ObservableObject {
     @Published var heartRate: Double = 0
     @Published var activeEnergy: Double = 0
     @Published var distance: Double = 0
+    @Published var workout: HKWorkout?
 
     func updateForStatistics(_ statistics: HKStatistics?) {
         guard let statistics = statistics else { return }
@@ -131,6 +132,7 @@ class WorkoutManager: NSObject, ObservableObject {
     }
 
     func resetWorkout() {
+        workout = nil
         builder = nil
         session = nil
         activeEnergy = 0
@@ -154,6 +156,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
             builder?.endCollection(withEnd: date) { (success, error) in
                 self.builder?.finishWorkout { (workout, error) in
                     DispatchQueue.main.async {
+                        self.workout = workout
                         //동작한 workout이 어떤 workout인지 확인하고 파라미터로 받을 수 있습니다.
                     }
                 }

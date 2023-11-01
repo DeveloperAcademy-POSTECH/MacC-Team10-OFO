@@ -9,12 +9,15 @@
 import SwiftUI
 
 struct StartView: View {
+    @EnvironmentObject var workoutManager: WorkoutManager
     @State private var didStartWorkout = false
+
     var body: some View {
         NavigationStack {
             VStack {
                 Button {
                     didStartWorkout = true
+                    workoutManager.startWorkout()
                     // 풋살 기록 시작
                 } label: {
                     Image(systemName: "play.fill")

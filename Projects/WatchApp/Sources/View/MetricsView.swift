@@ -9,16 +9,19 @@
 import SwiftUI
 
 struct MetricsView: View {
+    @EnvironmentObject var workoutManager: WorkoutManager
+
     var body: some View {
         TimelineView(MetricsTimelineSchedule(
-            from: Date(),
-            isPaused: true)) { context in
+            from: workoutManager.builder?.startDate ?? Date(),
+            isPaused: workoutManager.session?.state == .paused)) { context in
             VStack(alignment: .leading) {
-                Text("00:00.00")
-                HStack {
-                    Text("3.45KM").padding()
-                    Text("1,200Kcal").padding()
-                }
+                ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0, showSubseconds: context.cadence == .live)
+                    .foregroundStyle(.yellow)
+                Text(Measurement(value: workoutManager.activeEnergy, unit: UnitEnergy.kilocalories)
+                        .formatted(.measurement(width: .abbreviated, usage: .workout, numberFormatStyle: .number.precision(.fractionLength(0)))))
+                Text(workoutManager.heartRate.formatted(.number.precision(.fractionLength(0))) + " bpm")
+                Text(Measurement(value: workoutManager.distance, unit: UnitLength.meters).formatted(.measurement(width: .abbreviated, usage: .road)))
             }
             .font(.system(.title, design: .rounded).monospacedDigit().lowercaseSmallCaps())
             .frame(maxWidth: .infinity, alignment: .leading)
