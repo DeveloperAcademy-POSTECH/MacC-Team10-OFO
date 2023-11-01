@@ -12,11 +12,13 @@ import SwiftData
 // Match와 연관 필요.
 @Model
 public final class Record {
-    public let totalPlay: Int
-    public let totalPlayTime: Date
-    public let totalCalories: Double
-    public let totalDistanceCovered: Double
-    public let matches: [Match]
+    public var totalPlay: Int
+    public var totalPlayTime: Date
+    public var totalCalories: Double
+    public var totalDistanceCovered: Double
+
+    @Relationship(deleteRule: .cascade, inverse: \Match.record)
+    public var matches: [Match] = [Match]()
 
     public init(
         totalPlay: Int,
