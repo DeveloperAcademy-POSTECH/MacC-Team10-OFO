@@ -115,7 +115,7 @@ public struct RecordView: View {
             sum + workout.duration
         }
         totalDistance = workouts.reduce(0.0) { sum, workout in
-            sum + workout.distance
+            sum + workout.totalDistance
         }
     }
 
@@ -158,7 +158,7 @@ public struct RecordView: View {
                             .padding(.bottom, 8)
 
                             HStack {
-                                Text("\(workout.totalCyclingDistance/1000, specifier: "%.3f KM")")
+                                Text("\(workout.totalDistance/1000, specifier: "%.3f KM")")
                                     .padding(.leading, 16)
                                     .padding(.trailing, 4)
                                     .fontWeight(.bold)
