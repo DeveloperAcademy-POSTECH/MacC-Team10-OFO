@@ -29,6 +29,9 @@ struct StartView: View {
             .navigationDestination(isPresented: $didStartWorkout) {
                 SessionPagingView()
             }
+            .onAppear {
+                workoutManager.requestAuthorization()
+            }
         }
     }
 }

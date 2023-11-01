@@ -156,8 +156,7 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
             builder?.endCollection(withEnd: date) { (success, error) in
                 self.builder?.finishWorkout { (workout, error) in
                     DispatchQueue.main.async {
-                        self.workout = workout
-                        //동작한 workout이 어떤 workout인지 확인하고 파라미터로 받을 수 있습니다.
+                        self.workout = workout // 동작한 workout이 어떤 workout인지 확인하고 파라미터로 받을 수 있습니다.
                     }
                 }
             }

@@ -9,13 +9,16 @@
 import SwiftUI
 
 struct ControlsView: View {
+
     @EnvironmentObject var workoutManager: WorkoutManager
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         HStack {
             VStack {
                 Button {
                     workoutManager.endWorkout() // 풋살 끝 버튼
+                    dismiss()
                 } label: {
                     Image(systemName: "xmark")
                 }

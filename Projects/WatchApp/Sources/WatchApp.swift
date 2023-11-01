@@ -17,7 +17,7 @@ struct WatchApp: App {
                 StartView()
             })
             .sheet(isPresented: $workoutManager.showingSummaryView, content: {
-//                SummeryView()
+                SummaryView()
             })
             .environmentObject(workoutManager)
         }
