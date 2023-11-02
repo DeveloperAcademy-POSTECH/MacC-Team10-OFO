@@ -30,9 +30,6 @@ import Core
 
     func fetchPlayer() -> Player? {
         if let players: [Player] = swiftDataManager.fetchItem() {
-            for index in 0..<players.count {
-                print(players[index].height)
-            }
             return players.first
         } else {
             return nil
