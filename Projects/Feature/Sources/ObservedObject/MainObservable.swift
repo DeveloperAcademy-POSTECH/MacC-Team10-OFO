@@ -21,14 +21,14 @@ import Core
     init(modelContext: ModelContext) {
         self.swiftDataManager = SwiftDataManager<Player>(modelContext: modelContext)
         self.modelContext = modelContext
-        self.player = fetchPlayerInfo()
+        self.player = fetchPlayer()
     }
 
-    func updatePlayerInfo(player: Player) {
+    func updatePlayer(player: Player) {
         self.player?.height = player.height
     }
 
-    func fetchPlayerInfo() -> Player? {
+    func fetchPlayer() -> Player? {
         if let players: [Player] = swiftDataManager.fetchItem() {
             for index in 0..<players.count {
                 print(players[index].height)
