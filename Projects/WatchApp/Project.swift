@@ -16,7 +16,12 @@ let infoPlist: [String: Plist.Value] = [
     "UIMainStoryboardFile": "",
     "UILaunchStoryboardName": "LaunchScreen",
     "WKApplication": true,
-    "WKCompanionAppBundleIdentifier": "com.kozi.watchapp"
+    "WKCompanionAppBundleIdentifier": "com.kozi.watchapp",
+    "Required background modes (Watch)": ["Workout Processing"],
+    "Privacy - Health Share Usage Description":
+        "Your workout related data will be used to display your saved workouts in MyWorkouts.",
+    "Privacy - Health Update Usage description":
+        "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit."
 ]
 
 let project = Project.makeWatchModule(name: moduleName,
