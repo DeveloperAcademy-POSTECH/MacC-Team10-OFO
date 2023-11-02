@@ -8,6 +8,8 @@
 
 import SwiftUI
 import Common
+import Core
+import SwiftData
 
 enum RecordType {
     case distanceCovered
@@ -16,7 +18,14 @@ enum RecordType {
 
 struct MainView: View {
 
-    @ObservedObject var observable = MainObservableObject()
+    @Environment(\.modelContext) var context
+    @State private var observable: MainObservable
+
+    @MainActor
+    init(modelContext: ModelContext) {
+        let observable = MainObservable(modelContext: modelContext)
+        _observable = State(initialValue: observable)
+    }
 
     var body: some View {
         NavigationView {
@@ -24,12 +33,25 @@ struct MainView: View {
                 Color(red: 24 / 255, green: 26 / 255, blue: 31 / 255)
                     .ignoresSafeArea()
                 VStack {
-                    DonutChartView(distanceCovered: observable.player.average.averageDistanceCovered,
-                                   calories: observable.player.average.averageCalories,
-                                   innerCircleSize: 93,
-                                   outerCircleSize: 104,
-                                   centerText: Text("79").font(.system(size: 34, weight: .semibold)))
-                    .frame(width: 226, height: 226)
+                    if let player = observable.player {
+                        Text("\(player.height)")
+                    }
+                    HStack {
+                        Button {
+                        } label: {
+                            Text("update")
+                        }
+                        Button {
+                        } label: {
+                            Text("add")
+                        }
+                        Button {
+                        } label: {
+                            Text("fetch")
+                        }
+                    }
+
+
                     userExpSummaryCell
                 }
                 .toolbar {
@@ -47,6 +69,7 @@ struct MainView: View {
                 .navigationTitle("기록")
             }
         }
+
     }
 
     var userExpSummaryCell: some View {
@@ -69,10 +92,10 @@ struct MainView: View {
                         .padding(.horizontal, 18)
                     }
                     expProgressBar(type: .distanceCovered,
-                                   value: observable.player.average.averageDistanceCovered * 100)
+                                   value: 77)
                     .padding(.top, 20)
                     expProgressBar(type: .calories,
-                                   value: observable.player.average.averageCalories * 100)
+                                   value: 77)
                     .padding(.top, 25)
                 }
             }
@@ -120,6 +143,6 @@ struct MainView: View {
     }
 }
 
-#Preview {
-    MainView()
-}
+//#Preview {
+//    MainView()
+//}
