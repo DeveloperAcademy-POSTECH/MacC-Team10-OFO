@@ -16,9 +16,8 @@ public final class Match {
     public var distanceCovered: Double
     public var calories: Double
     public var playTime: Date
-    public var image: Image?
+    public var image: Data?
     public var goal: PlayerGoals
-    
     public var record: Record
 
     public init(
@@ -27,14 +26,17 @@ public final class Match {
         distanceCovered: Double,
         calories: Double,
         playTime: Date,
-        image: Image? = nil,
-        goal: PlayerGoals) {
-            self.id = id
-            self.matchDate = matchDate
-            self.distanceCovered = distanceCovered
-            self.calories = calories
-            self.goal = goal
-            self.playTime = playTime
-            self.image = image
-        }
+        record: Record,
+        image: Data? = nil,
+        goal: PlayerGoals)
+    {
+        self.id = id
+        self.matchDate = matchDate
+        self.distanceCovered = distanceCovered
+        self.calories = calories
+        self.playTime = playTime
+        self.record = record
+        self.image = image
+        self.goal = goal
+    }
 }
