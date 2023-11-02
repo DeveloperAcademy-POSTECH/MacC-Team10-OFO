@@ -32,7 +32,7 @@ public final class Player {
     }
 }
 
-public struct PlayerGoals {
+public struct PlayerGoals: Codable {
     public var goalCalories: Double
     public var goalDistanceCovered: Double
 
@@ -45,7 +45,7 @@ public struct PlayerGoals {
     }
 }
 
-public enum GenderType {
+public enum GenderType: Codable {
     case male
     case female
 }
