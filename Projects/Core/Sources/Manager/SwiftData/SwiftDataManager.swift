@@ -11,12 +11,15 @@ import SwiftData
 
 enum SwiftDataError: Error {
     case playerContainerError
+    case recordContainerError
     case fetchError
 
     var description: String {
         switch self {
         case .playerContainerError:
             "@Error - PlayerContainerError"
+        case .recordContainerError:
+            "@Error - RecordContainerError"
         case .fetchError:
             "@Error - FetchError"
         }
@@ -39,6 +42,16 @@ public let playerContainer: ModelContainer = {
         return container
     } catch {
         fatalError(SwiftDataError.playerContainerError.description)
+    }
+}()
+
+@MainActor
+public let recordContainer: ModelContainer = {
+    do {
+        let container = try ModelContainer(for: Record.self)
+        return container
+    } catch {
+        fatalError(SwiftDataError.recordContainerError.description)
     }
 }()
 
