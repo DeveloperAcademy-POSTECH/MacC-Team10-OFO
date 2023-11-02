@@ -9,7 +9,6 @@
 import Foundation
 import SwiftData
 
-// Match와 연관 필요.
 @Model
 public final class Record {
     public var totalPlay: Int
@@ -22,15 +21,14 @@ public final class Record {
 
     public init(
         totalPlay: Int,
-        totalPlayTime: Date, 
+        totalPlayTime: Date,
         totalCalories: Double,
         totalDistanceCovered: Double,
-        matches: [Match])
-    {
-        self.totalPlay = totalPlay
-        self.totalPlayTime = totalPlayTime
-        self.totalCalories = totalCalories
-        self.totalDistanceCovered = totalDistanceCovered
-        self.matches = matches
-    }
+        matches: [Match]) {
+            self.totalPlay = totalPlay
+            self.totalPlayTime = totalPlayTime
+            self.totalCalories = totalCalories
+            self.totalDistanceCovered = totalDistanceCovered
+            self.matches = matches
+        }
 }
