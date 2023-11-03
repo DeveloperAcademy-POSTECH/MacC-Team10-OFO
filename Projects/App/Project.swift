@@ -16,7 +16,7 @@ let watchInfoPlist: [String: Plist.Value] = [
     "UIMainStoryboardFile": "",
     "UILaunchStoryboardName": "LaunchScreen",
     "WKApplication": true,
-    "WKCompanionAppBundleIdentifier": "com.kozi.app",
+    "WKCompanionAppBundleIdentifier": "com.ofo.lockerroom",
     "Required background modes (Watch)": ["Workout Processing"],
     "NSHealthShareUsageDescription": "Your workout related data will be used to display your saved workouts in MyWorkouts.",
     "NSHealthUpdateUsageDescription": "Workouts tracked by MyWorkouts on Apple Watch will be saved to HealthKit."
@@ -36,7 +36,7 @@ let watchTarget = Target(
     name: "WatchExtension_App",
     platform: .watchOS,
     product: .app,
-    bundleId: "com.kozi.app.extension",
+    bundleId: "com.ofo.lockerroom.extension",
     deploymentTarget: .watchOS(targetVersion: "10.0"),
     infoPlist: .extendingDefault(with: watchInfoPlist),
     sources: ["WatchExtension/**"],

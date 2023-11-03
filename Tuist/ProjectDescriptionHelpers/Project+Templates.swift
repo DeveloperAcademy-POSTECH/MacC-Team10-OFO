@@ -7,7 +7,7 @@ import ProjectDescription
 
 extension Project {
     
-    private static let organizationName = "com.kozi."
+    private static let organizationName = "com.ofo."
 
     public static func makeModule(
         name: String,
@@ -44,7 +44,7 @@ extension Project {
             name: "\(name)Tests",
             platform: platform,
             product: .unitTests,
-            bundleId: "com.kozi.\(name)Tests",
+            bundleId: "com.ofo.\(name)Tests",
             infoPlist: .default,
             sources: ["Tests/**"],
             dependencies: [
@@ -76,7 +76,7 @@ extension Project {
             name: "WatchApp",
             platform: .watchOS,
             product: .staticFramework,
-            bundleId: "com.kozi.watchTarget.app",
+            bundleId: "com.ofo.watchTarget.app",
             deploymentTarget: .watchOS(targetVersion: "10.0"),
             infoPlist: .extendingDefault(with: infoPlist),
             sources: sources,
@@ -89,7 +89,7 @@ extension Project {
             name: "\(name)Tests",
             platform: .watchOS,
             product: .unitTests,
-            bundleId: "com.kozi.watchTargetTests",
+            bundleId: "com.ofo.watchTargetTests",
             infoPlist: .default,
             sources: ["Tests/**"],
             dependencies: [
