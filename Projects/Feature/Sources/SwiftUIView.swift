@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import SwiftData
+import Core
 
 public struct SwiftUIView: View {
 
@@ -14,10 +16,11 @@ public struct SwiftUIView: View {
 
     public var body: some View {
         TabView {
-            MainView()
+            MainView(modelContext: playerContainer.mainContext)
                 .tabItem {
                     Label("홈", systemImage: "flame.fill")
                 }
+                .modelContainer(playerContainer)
             RecordView()
                 .tabItem {
                     Label("기록", systemImage: "person.crop.rectangle.stack")
