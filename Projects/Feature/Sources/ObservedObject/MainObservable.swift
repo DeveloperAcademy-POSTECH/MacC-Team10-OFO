@@ -6,8 +6,6 @@
 //  Copyright © 2023 com.kozi. All rights reserved.
 //
 
-import SwiftUI
-import SwiftData
 import Core
 import SwiftData
 import SwiftUI
@@ -30,9 +28,11 @@ import SwiftUI
         self.player?.height = player.height
     }
 
+    ///func fetchPlayer: 플레이어 정보를 패치합니다.
+    ///return: [Player].first
     func fetchPlayer() -> Player? {
-        if let players: [Player] = swiftDataManager.fetchItem() {
-            return players.first
+        if let player: [Player] = swiftDataManager.fetchItem() {
+            return player.first
         } else {
             return nil
         }
