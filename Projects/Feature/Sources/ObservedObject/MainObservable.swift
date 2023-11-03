@@ -9,6 +9,8 @@
 import SwiftUI
 import SwiftData
 import Core
+import SwiftData
+import SwiftUI
 
 @Observable class MainObservable {
 
