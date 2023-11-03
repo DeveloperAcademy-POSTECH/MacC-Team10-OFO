@@ -16,7 +16,7 @@ public final class Match {
     public var matchDate: Date
     public var distanceCovered: Double
     public var calories: Double
-    public var playTime: Date
+    public var playTime: TimeInterval
     public var image: Data?
     public var goal: PlayerGoals
     public var record: Record
