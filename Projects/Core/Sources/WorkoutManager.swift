@@ -48,8 +48,8 @@ extension WorkoutManager {
             let sortByStartDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
 
             let query = HKSampleQuery(sampleType: .workoutType(),
-//                                      predicate: .none, //여기가 언제부터 언제까지 시간에 따른 predicate 이거 바꿔주면 전체 데이터로 가능
-                                      predicate: compoundPredicate,
+                                      predicate: .none, //여기가 언제부터 언제까지 시간에 따른 predicate 이거 바꿔주면 전체 데이터로 가능
+//                                      predicate: compoundPredicate,
                                       limit: HKObjectQueryNoLimit,
                                       sortDescriptors: [sortByStartDate]) { (query, samples, error) in
                 if let error {

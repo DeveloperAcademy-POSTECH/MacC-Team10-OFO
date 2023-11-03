@@ -7,6 +7,7 @@
 
 import Core
 import os
+import SwiftData
 import SwiftUI
 import HealthKit
 import HealthKitUI
@@ -20,6 +21,14 @@ public struct RecordView: View {
     @State private var totalCalories: Double = 0.0
     @State private var totalPlayTime: TimeInterval = 0.0
     @State private var totalDistance: Double = 0.0
+
+    @State private var observable: RecordObservable
+
+    @MainActor
+    init(modelContext: ModelContext) {
+        let observable = RecordObservable(modelContext: modelContext)
+        self._observable = State(initialValue: observable)
+    }
 
     private let workoutManager = WorkoutManager.shared
 
@@ -68,9 +77,10 @@ public struct RecordView: View {
             }.background(Color(.systemGroupedBackground))
                 .toolbar {
                     Button {
-                        Task {
-                            workoutList = await workoutManager.fetchTodaysWorkouts(workoutType: .soccer)
-                        }
+//                        Task {
+//                            workoutList = await workoutManager.fetchTodaysWorkouts(workoutType: .soccer)
+//                        }
+                        observable.updateCalories()
                         print("Refresh!")
                     } label: {
                         Label("Profile", systemImage: "ellipsis.circle")

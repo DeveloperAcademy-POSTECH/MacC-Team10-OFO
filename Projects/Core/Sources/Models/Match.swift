@@ -8,7 +8,6 @@
 
 import SwiftData
 import SwiftUI
-import SwiftData
 
 @Model
 public final class Match {
@@ -26,7 +25,7 @@ public final class Match {
         matchDate: Date,
         distanceCovered: Double,
         calories: Double,
-        playTime: Date,
+        playTime: TimeInterval,
         record: Record,
         image: Data? = nil,
         goal: PlayerGoals)
