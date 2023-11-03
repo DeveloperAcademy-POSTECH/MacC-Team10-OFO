@@ -6,6 +6,7 @@
 //  Copyright © 2023 com.kozi. All rights reserved.
 //
 
+import SwiftData
 import SwiftUI
 import SwiftData
 
