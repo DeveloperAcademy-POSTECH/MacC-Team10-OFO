@@ -21,11 +21,12 @@ public struct SwiftUIView: View {
                     Label("홈", systemImage: "flame.fill")
                 }
                 .modelContainer(playerContainer)
-            RecordView()
+            RecordView(modelContext: recordContainer.mainContext)
                 .tabItem {
                     Label("기록", systemImage: "person.crop.rectangle.stack")
                 }
                 .background(Color(.systemGroupedBackground))
+                .modelContainer(recordContainer)
         }
         .accentColor(.black)
     }
