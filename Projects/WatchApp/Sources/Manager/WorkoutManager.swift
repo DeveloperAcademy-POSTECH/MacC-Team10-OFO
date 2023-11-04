@@ -100,7 +100,7 @@ class WorkoutManager: NSObject, ObservableObject {
 
     func endWorkout() {
         session?.end()
-        showingSummaryView = true
+//        showingSummaryView = true
     }
 
     // MARK: - Workout Metrics
@@ -157,6 +157,12 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
                 self.builder?.finishWorkout { (workout, _) in   // (workout, error) in
                     DispatchQueue.main.async {
                         self.workout = workout // 동작한 workout이 어떤 workout인지 확인하고 파라미터로 받을 수 있습니다.
+                    }
+
+                    if workout?.duration ?? 0 < 20 {
+                        self.resetWorkout()
+                    } else {
+                        self.showingSummaryView = true
                     }
                 }
             }
