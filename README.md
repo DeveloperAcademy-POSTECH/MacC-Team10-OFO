@@ -1,14 +1,36 @@
-# MacC-Team10-OFO
-
-### 커밋 메세지
-Example) feat: 삭제 기능 구현(#30)
-- feat: 기능 추가
-- fix: 기능상의 변경을 이유로 코드가 수정될 때
-- style: 코드 스타일 변경(코드 포매팅, 세미콜론 누락 등), 기능 수정이 없는 경우
-- docs: 문서 수정
-- bug: 기능이 동작하지 않을 때 해결한 후
-- refactor: 기능의 변경이 없으나 코드의 효율이 올라갔을 때
-- chore: 프로젝트 세팅에 변경이 생길 경우
-- test: 테스트 코드 작성시
-- remove: 파일을 삭제만 한 경우
-- rename: 파일 혹은 폴더명을 수정했을 때
+<div align="center">
+    <h2>OFO</h2>
+    <br>
+    <h2>📝Introduce📝</h2>
+    <h3>Big Idea : 축구⚽️</h3>
+    <br>
+    <h3>🏁Our Challenge : 축구를 기록할 수 있게 해주자🥅</h3>
+    <br>
+    <h3>🚂Our Solution Concept : 축구를 할 때 운동 기록을 애플워치⌚️로 측정할 수 있게 해주자</h3>
+    <br>
+    <h3>📱Prototype📱</h3>
+    <img width="1000" alt="features" src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team10-OFO/assets/87136217/c0f45d0c-7bc4-4eaf-b052-a50d1bc548d9.png">
+    <h2>🛠Develop Framework🛠</h2>
+    <h3>IOS, WatchOS, SwiftUI, MVO, tuist, HealthKit, SwiftData<br>Figma </h3>
+    <br>
+    <h2>Collaborators</h2>
+    <table>
+      <tr>
+        <td><img src="https://avatars.githubusercontent.com/u/49385546?v=4" width="130"></td>
+        <td><img src="https://avatars.githubusercontent.com/u/87136217?v=4" width="130"></td>
+        <td><img src="https://avatars.githubusercontent.com/u/36729917?v=4" width="130"></td>
+        <td><img src="https://avatars.githubusercontent.com/u/6462456?v=4" width="130"></td>
+      </tr>
+      <tr align=center>
+        <td><a href='https://github.com/sozohoy'>@sozohoy(코지)</a></td>
+        <td><a href='https://github.com/eemdeeks'>@eemdeeks(딴)</a></td>
+        <td><a href='https://github.com/hhajime'>@hhajime(하지메)</a></td>
+        <td><a href='https://github.com/poodlepoodle'>@poodlepoodle(푸들)</a></td>
+      </tr>
+        <tr align=center>
+        <td>iOS</td>
+        <td>iOS</td>
+        <td>iOS</td>
+        <td>iOS</td>
+      </tr>
+    </table>
