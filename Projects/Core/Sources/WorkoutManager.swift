@@ -48,7 +48,7 @@ extension WorkoutManager {
             let sortByStartDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
 
             let query = HKSampleQuery(sampleType: .workoutType(),
-                                      predicate: .none, //여기가 언제부터 언제까지 시간에 따른 predicate 이거 바꿔주면 전체 데이터로 가능
+                                      predicate: .none, // 여기가 언제부터 언제까지 시간에 따른 predicate 이거 바꿔주면 전체 데이터로 가능
 //                                      predicate: compoundPredicate,
                                       limit: HKObjectQueryNoLimit,
                                       sortDescriptors: [sortByStartDate]) { (query, samples, error) in
@@ -62,6 +62,18 @@ extension WorkoutManager {
             healthStore.execute(query)
         }
         let workouts = samples as? [HKWorkout]
+
+        var deleteWorkouts = [] as [HKWorkout]
+        if let workoutList = workouts {
+            for workout in workoutList where workout.duration < 20 {
+                deleteWorkouts.append(workout)
+                print("@Log - deleteWorkout : \(workout)")
+            }
+        }
+        healthStore.delete(deleteWorkouts) { success, _ in  // success, error in
+            print("@WorkoutManager_iOS - Delete success? \(success)")
+        }
+
         return workouts == nil ? [] : workouts!
     }
 
